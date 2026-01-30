@@ -1,0 +1,212 @@
+---
+import { text } from "@/data/i18n";
+import Button from "../common/Button.astro";
+import { MeteorOrbit } from "../ui/meteor-orbit";
+import { FancyText } from "@/components/ui/fancy-text";
+import LustreText from "@/components/ui/lustretext";
+import { Badge } from "@/components/ui/badge";
+import Typeanimation from "@/components/ui/typeanimation";
+import { ArrowRight, Mail, BadgeCheck } from "lucide-react";
+
+const t = text.hero;
+
+const orbitIconsData = [
+    {
+        icon: "GitBash",
+        orbitIndex: 3,
+        position: 140,
+    },
+    {
+        icon: "GitHub",
+        orbitIndex: 3,
+        position: 40,
+        iconClassName: "dark:invert",
+    },
+    {
+        icon: "Vercel",
+        orbitIndex: 3,
+        position: 195,
+        iconClassName: "dark:invert",
+    },
+    {
+        icon: "ChatGPT",
+        orbitIndex: 3,
+        position: 345,
+        iconClassName: "dark:invert",
+    },
+    { icon: "React", orbitIndex: 2, position: 215 },
+    { icon: "VSCode", orbitIndex: 2, position: 325 },
+    { icon: "Google", orbitIndex: 1, position: 235 },
+    { icon: "Antigravity", orbitIndex: 1, position: 305 },
+];
+---
+
+<section id="home" class="relative overflow-hidden">
+    <div
+        class="absolute inset-0 w-full h-full bg-light-bg dark:bg-dark-bg transition-colors duration-300"
+    >
+        <!-- Static Luxury Gradient: Gold glow from top-center -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(212,175,55,0.15),transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_-20%,rgba(212,175,55,0.2),transparent_70%)] pointer-events-none"
+        >
+        </div>
+
+        <!-- Subtle Grid Pattern for texture (Optional, very low opacity) -->
+        <div
+            class="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+        >
+        </div>
+    </div>
+
+    <!-- Content Container -->
+    <div
+        class="max-w-7xl mx-auto px-6 w-full min-h-screen pt-20 lg:pt-32 pb-12 lg:pb-0 flex flex-col lg:flex-row items-center justify-between relative z-10 gap-12 lg:gap-0 pointer-events-auto"
+    >
+        <!-- Left Content Area -->
+        <div
+            class="flex-1 text-left flex flex-col items-start max-w-2xl w-full lg:-translate-y-24 order-1 lg:order-1 relative z-20"
+        >
+            <div
+                class="opacity-0 animate-fade-in-up"
+                style="animation-delay: 0.1s;"
+            >
+                <Badge
+                    client:load
+                    variant="default"
+                    shiny={true}
+                    shinySpeed={6}
+                    className="bg-black text-white dark:bg-white/10 dark:text-white dark:border-white/20 border-transparent px-5 py-2 mb-6 md:mb-8 text-xs md:text-sm font-bold uppercase tracking-wide font-display"
+                >
+                    {t.badge || "Available for Projects"}
+                </Badge>
+            </div>
+
+            <div
+                class="mb-4 w-full opacity-0 animate-fade-in-up"
+                style="animation-delay: 0.3s;"
+            >
+                <h1
+                    class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-light-textPrimary dark:text-white leading-tight"
+                >
+                    <FancyText
+                        client:load
+                        text={t.greeting}
+                        className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-light-textPrimary/20 dark:text-white/20"
+                        fillClassName="text-light-textPrimary dark:text-white"
+                    />
+                </h1>
+            </div>
+
+            <div
+                class="mb-8 w-full opacity-0 animate-fade-in-up"
+                style="animation-delay: 0.5s;"
+            >
+                <h2>
+                    <LustreText
+                        text="Jakkob."
+                        className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight underline pb-4 leading-relaxed text-light-accent"
+                        speed={6}
+                    />
+                </h2>
+            </div>
+
+            <div
+                class="h-8 md:h-12 mb-10 opacity-0 animate-fade-in-up w-full"
+                style="animation-delay: 0.7s;"
+            >
+                <Typeanimation
+                    client:load
+                    words={[
+                        "Junior Web Developer",
+                        "Frontend Developer",
+                        "Full-Stack (Junior)",
+                        "Web Developer",
+                    ]}
+                    typingSpeed={60}
+                    deletingSpeed={40}
+                    pauseDuration={1200}
+                    gradientFrom="light-accent"
+                    gradientTo="dark-accent"
+                    className="text-lg md:text-2xl font-medium text-light-textSecondary dark:text-gray-300 font-mono block transition-colors duration-300 whitespace-nowrap"
+                />
+            </div>
+
+            <div
+                class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 opacity-0 animate-fade-in-up w-full sm:w-auto"
+                style="animation-delay: 0.9s;"
+            >
+                <Button
+                    href="#projects"
+                    variant="primary"
+                    class="font-display px-7 py-3.5 w-full sm:w-auto text-center justify-center text-sm md:text-base font-semibold tracking-wide shadow-[0_10px_30px_rgba(212,175,55,0.35)] hover:shadow-[0_12px_34px_rgba(212,175,55,0.45)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-accent/50 dark:text-black"
+                >
+                    {t.ctaPrimary}
+                    <ArrowRight className="w-5 h-5" />
+                </Button>
+                <Button
+                    href="#contact"
+                    variant="outline"
+                    class="font-display px-7 py-3.5 w-full sm:w-auto text-center justify-center text-sm md:text-base font-semibold tracking-wide border-light-accent/60 dark:border-white/20 dark:text-white hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-accent/50"
+                >
+                    {t.ctaSecondary}
+                    <Mail className="w-5 h-5" />
+                </Button>
+            </div>
+        </div>
+
+        <!-- Right Visual Area (Bottom-Right Focus) -->
+        <div
+            class="flex-1 relative flex items-center justify-center lg:items-end lg:justify-end lg:self-end w-full lg:w-auto opacity-0 animate-fade-in-up order-2 lg:order-2"
+            style="animation-delay: 0.5s;"
+        >
+            <div
+                class="relative scale-[0.8] md:scale-75 lg:scale-[1.2] translate-y-12 md:translate-y-0 lg:-translate-y-12 lg:translate-x-24"
+            >
+                <MeteorOrbit
+                    client:load
+                    icons={orbitIconsData}
+                    size={900}
+                    rippleCount={4}
+                    meteorGradients={[
+                        ["#FFD700", "#FFD700"],
+                        ["#D4AF37", "#D4AF37"],
+                        ["#FFD700", "#D4AF37"],
+                    ]}
+                    className="max-w-full"
+                >
+                    <div class="relative">
+                        <div
+                            class="absolute -inset-10 bg-dark-accent/10 rounded-full blur-3xl animate-pulse"
+                        >
+                        </div>
+                        <div
+                            class="w-24 h-24 lg:w-32 lg:h-32 rounded-full border-2 border-dark-accent/30 flex items-center justify-center p-2 backdrop-blur-sm bg-white/5 relative z-20 overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)]"
+                        >
+                            <BadgeCheck
+                                className="w-12 h-12 lg:w-16 lg:h-16 text-light-accent dark:text-[#D4AF37] filter drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]"
+                                strokeWidth={1.5}
+                            />
+                        </div>
+                    </div>
+                </MeteorOrbit>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</section>

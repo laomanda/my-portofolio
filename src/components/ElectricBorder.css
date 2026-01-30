@@ -1,0 +1,79 @@
+.electric-border {
+  --electric-light-color: oklch(from var(--electric-border-color) l c h);
+  position: relative;
+  border-radius: inherit;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.eb-canvas-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.eb-canvas {
+  display: block;
+}
+
+.eb-content {
+  position: relative;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.eb-layers {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.eb-glow-1,
+.eb-glow-2,
+.eb-background-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+@keyframes electric-glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: blur(3px);
+  }
+
+  50% {
+    opacity: 0.6;
+    filter: blur(4px);
+  }
+}
+
+.eb-glow-1 {
+  border: 2px solid var(--electric-light-color);
+  filter: blur(2px);
+  opacity: 0.5;
+  box-shadow: 0 0 8px var(--electric-border-color);
+  animation: electric-glow-pulse 3s ease-in-out infinite;
+}
+
+.eb-glow-2 {
+  border: 1px solid var(--electric-border-color);
+  filter: blur(6px);
+  opacity: 0.3;
+}
+
+.eb-background-glow {
+  z-index: -1;
+  filter: blur(30px);
+  opacity: 0.15;
+  background: radial-gradient(circle at 50% 50%, var(--electric-border-color), transparent 60%);
+}

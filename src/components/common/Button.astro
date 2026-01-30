@@ -1,0 +1,48 @@
+---
+interface Props {
+    href?: string;
+    variant?: "primary" | "outline";
+    class?: string;
+    [key: string]: any;
+}
+
+const {
+    href,
+    variant = "primary",
+    class: className = "",
+    ...rest
+} = Astro.props;
+
+const baseStyles =
+    "inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm leading-none tracking-wide transition-all duration-500 ease-out transform hover:scale-105 hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent relative overflow-hidden group box-border";
+
+const variants = {
+    primary:
+        "bg-gradient-to-r from-light-accent via-yellow-500 to-light-accent dark:from-dark-accent dark:via-yellow-400 dark:to-dark-accent text-white shadow-lg shadow-light-accent/30 dark:shadow-dark-accent/30 hover:shadow-xl hover:shadow-light-accent/50 dark:hover:shadow-dark-accent/50 border-2 border-transparent before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700",
+    outline:
+        "border-2 border-light-accent dark:border-dark-accent text-light-accent dark:text-dark-accent bg-transparent backdrop-blur-sm hover:bg-light-accent/10 dark:hover:bg-dark-accent/10 hover:border-light-accent hover:shadow-lg hover:shadow-light-accent/20 dark:hover:shadow-dark-accent/20 before:absolute before:inset-0 before:border before:border-light-accent/0 dark:before:border-dark-accent/0 hover:before:border-light-accent/30 dark:hover:before:border-dark-accent/30 before:rounded-full before:transition-all before:duration-500",
+};
+---
+
+{
+    href ? (
+        <a
+            href={href}
+            class:list={[baseStyles, variants[variant], className]}
+            {...rest}
+        >
+            <span class="relative z-10 flex items-center gap-2 whitespace-nowrap">
+                <slot />
+            </span>
+        </a>
+    ) : (
+        <button
+            class:list={[baseStyles, variants[variant], className]}
+            {...rest}
+        >
+            <span class="relative z-10 flex items-center gap-2 whitespace-nowrap">
+                <slot />
+            </span>
+        </button>
+    )
+}

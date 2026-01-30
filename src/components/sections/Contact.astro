@@ -1,0 +1,116 @@
+---
+import { text } from "../../data/i18n";
+import Button from "../common/Button.astro";
+
+const t = text.contact;
+---
+
+<section
+    id="contact"
+    class="py-20 bg-light-surface dark:bg-dark-surface transition-colors duration-300"
+>
+    <div class="max-w-3xl mx-auto px-6">
+        <h2
+            class="text-3xl md:text-4xl font-serif font-bold text-center mb-12 text-light-textPrimary dark:text-dark-textPrimary"
+        >
+            {t.title}
+        </h2>
+
+        <form id="contact-form" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label
+                        for="name"
+                        class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
+                        >{t.name}</label
+                    >
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white"
+                    />
+                </div>
+                <div class="space-y-2">
+                    <label
+                        for="email"
+                        class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
+                        >{t.email}</label
+                    >
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white"
+                    />
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label
+                    for="subject"
+                    class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
+                    >{t.subject}</label
+                >
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    required
+                    class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white"
+                />
+            </div>
+
+            <div class="space-y-2">
+                <label
+                    for="message"
+                    class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
+                    >{t.message}</label
+                >
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                    class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white resize-none"
+                ></textarea>
+            </div>
+
+            <div class="pt-4">
+                <Button
+                    variant="primary"
+                    type="submit"
+                    class="w-full justify-center"
+                >
+                    {t.send}
+                </Button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    import emailjs from "@emailjs/browser";
+
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+
+    form?.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // NOTE: Replace these with your actual EmailJS keys
+        // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form, 'YOUR_PUBLIC_KEY')
+        //   .then(() => {
+        //     alert('Message Sent!');
+        //     form.reset();
+        //   }, (error) => {
+        //     console.log('Failed...', error.text);
+        //     alert('Failed to send message.');
+        //   });
+
+        // Simulasi Pengiriman
+        alert("Simulasi: Pesan terkirim! Konfigurasikan EmailJS ID asli Anda.");
+        form.reset();
+    });
+</script>

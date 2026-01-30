@@ -1,0 +1,47 @@
+---
+import { text } from "../../data/i18n";
+import { Github, Linkedin, Instagram } from "@lucide/astro";
+
+const t = text.footer;
+---
+
+<footer
+    class="bg-light-bg dark:bg-dark-bg py-8 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300"
+>
+    <div
+        class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4"
+    >
+        <p
+            class="text-sm text-light-textSecondary dark:text-dark-textSecondary text-center md:text-left"
+        >
+            {t.copyright}
+        </p>
+
+        <div class="flex items-center gap-6">
+            <a
+                href="https://github.com"
+                target="_blank"
+                aria-label="GitHub"
+                class="text-light-textSecondary hover:text-light-accent dark:text-dark-textSecondary dark:hover:text-dark-accent transition-colors"
+            >
+                <Github class="w-6 h-6" />
+            </a>
+            <a
+                href="https://linkedin.com"
+                target="_blank"
+                aria-label="LinkedIn"
+                class="text-light-textSecondary hover:text-light-accent dark:text-dark-textSecondary dark:hover:text-dark-accent transition-colors"
+            >
+                <Linkedin class="w-6 h-6" />
+            </a>
+            <a
+                href="https://instagram.com"
+                target="_blank"
+                aria-label="Instagram"
+                class="text-light-textSecondary hover:text-light-accent dark:text-dark-textSecondary dark:hover:text-dark-accent transition-colors"
+            >
+                <Instagram class="w-6 h-6" />
+            </a>
+        </div>
+    </div>
+</footer>

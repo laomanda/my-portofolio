@@ -1,23 +1,166 @@
+---
+import "@fontsource/playfair-display";
+import "@fontsource/inter";
+import "@fontsource/cinzel";
+import "@fontsource/cormorant-garamond";
+import "../styles/global.css";
+import Preloader from "../components/common/Preloader.astro";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+	title: string;
+	lang?: string;
+}
+
+const { title, lang = "id" } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={lang} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="description" content="Portfolio Website" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<ClientRouter />
+		<meta
+			name="theme-color"
+			content="#D4AF37"
+			media="(prefers-color-scheme: light)"
+		/>
+		<meta
+			name="theme-color"
+			content="#FFD700"
+			media="(prefers-color-scheme: dark)"
+		/>
+		<title>{title}</title>
+
+		<script is:inline>
+			// Theme Initialization (Immediate)
+			const theme = (() => {
+				if (
+					typeof localStorage !== "undefined" &&
+					localStorage.getItem("theme")
+				) {
+					return localStorage.getItem("theme");
+				}
+				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					return "dark";
+				}
+				return "light";
+			})();
+
+			if (theme === "dark") {
+				document.documentElement.classList.add("dark");
+			} else {
+				document.documentElement.classList.remove("dark");
+			}
+
+			window.localStorage.setItem("theme", theme);
+		</script>
 	</head>
-	<body>
+	<body
+		class="bg-light-bg text-light-textPrimary dark:bg-dark-bg dark:text-dark-textPrimary transition-colors duration-300 font-sans"
+	>
+		<Preloader />
+
+		<!-- ParticlesBackground removed for performance -->
 		<slot />
+
+		<script>
+			import { ClientRouter } from "astro:transitions";
+			import Lenis from "lenis";
+			import { gsap } from "gsap";
+			import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			// Global Variables for cleanup
+			let lenis: any;
+			let rafId: any;
+
+			// --- Initialization Function ---
+			function initApp() {
+				// 1. Lenis Setup
+				lenis = new Lenis({
+					duration: 1.2,
+					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+				});
+
+				function raf(time: any) {
+					lenis.raf(time);
+					rafId = requestAnimationFrame(raf);
+				}
+				rafId = requestAnimationFrame(raf);
+
+				// 3. GSAP Animations (Refresh ScrollTrigger)
+				ScrollTrigger.refresh();
+
+				// Re-run stagger animations for new content
+				animateSections();
+			}
+
+			function animateSections() {
+				const sections =
+					document.querySelectorAll("section:not(#home)");
+				sections.forEach((section) => {
+					// Verify if already animated to avoid duplicates (optional check)
+
+					// Reveal Heading
+					const heading = section.querySelector("h2");
+					if (heading) {
+						gsap.fromTo(
+							heading,
+							{ y: 50, opacity: 0 },
+							{
+								y: 0,
+								opacity: 1,
+								duration: 1,
+								ease: "power3.out",
+								scrollTrigger: {
+									trigger: section,
+									start: "top 85%",
+								},
+							},
+						);
+					}
+
+					// Stagger children
+					const children = Array.from(section.children).filter(
+						(child) => child !== heading,
+					);
+					gsap.fromTo(
+						children,
+						{ y: 50, opacity: 0 },
+						{
+							y: 0,
+							opacity: 1,
+							duration: 1,
+							stagger: 0.2,
+							ease: "power3.out",
+							scrollTrigger: {
+								trigger: section,
+								start: "top 80%",
+							},
+						},
+					);
+				});
+			}
+
+			// --- Lifecycle Event Listeners ---
+
+			// Runs on initial load AND after every navigation
+			document.addEventListener("astro:page-load", () => {
+				initApp();
+			});
+
+			// Cleanup before swapping (Optional but good for memory)
+			document.addEventListener("astro:before-swap", () => {
+				if (lenis) lenis.destroy();
+				if (rafId) cancelAnimationFrame(rafId);
+				ScrollTrigger.getAll().forEach((t) => t.kill());
+			});
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

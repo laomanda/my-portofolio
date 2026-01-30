@@ -1,0 +1,66 @@
+---
+import { text } from "../../data/i18n";
+import Button from "../common/Button.astro";
+
+const t = text.about;
+---
+
+<section
+    id="about"
+    class="py-20 bg-light-bg dark:bg-dark-bg transition-colors duration-300"
+>
+    <div
+        class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+    >
+        <!-- Image -->
+        <div class="relative group">
+            <div
+                class="absolute inset-0 bg-light-accent dark:bg-dark-accent rounded-3xl transform rotate-6 scale-95 opacity-20 group-hover:rotate-3 transition-transform duration-500"
+            >
+            </div>
+            <div
+                class="relative bg-gray-200 dark:bg-gray-800 rounded-3xl overflow-hidden aspect-[4/5] shadow-lg"
+            >
+                <img
+                    src="https://placehold.co/400x500"
+                    alt="Jakkob Profile"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                />
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div>
+            <h2
+                class="text-3xl md:text-4xl font-serif font-bold mb-6 text-light-textPrimary dark:text-dark-textPrimary"
+            >
+                {t.title}
+            </h2>
+            <p
+                class="text-lg text-light-textSecondary dark:text-dark-textSecondary leading-relaxed mb-8"
+            >
+                {t.desc}
+            </p>
+
+            <div class="space-y-4 mb-8">
+                <!-- Additional details if needed -->
+                <div
+                    class="flex items-center gap-4 text-light-textPrimary dark:text-dark-textPrimary"
+                >
+                    <span class="font-bold">Location:</span>
+                    <span>Indonesia</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-light-textPrimary dark:text-dark-textPrimary"
+                >
+                    <span class="font-bold">Email:</span>
+                    <span>contact@example.com</span>
+                </div>
+            </div>
+
+            <Button href="/cv.pdf" variant="primary" download>
+                {t.downloadCv}
+            </Button>
+        </div>
+    </div>
+</section>
