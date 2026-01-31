@@ -8,159 +8,129 @@ import Preloader from "../components/common/Preloader.astro";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
-	title: string;
-	lang?: string;
+  title: string;
+  lang?: string;
 }
 
 const { title, lang = "id" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Portfolio Website" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<ClientRouter />
-		<meta
-			name="theme-color"
-			content="#D4AF37"
-			media="(prefers-color-scheme: light)"
-		/>
-		<meta
-			name="theme-color"
-			content="#FFD700"
-			media="(prefers-color-scheme: dark)"
-		/>
-		<title>{title}</title>
+<html lang={lang} class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Portfolio Website" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <meta
+      name="theme-color"
+      content="#FFD700"
+      media="(prefers-color-scheme: dark)"
+    />
+    <title>{title}</title>
+  </head>
+  <body
+    class="bg-light-bg text-light-textPrimary dark:bg-dark-bg dark:text-dark-textPrimary transition-colors duration-300 font-sans"
+  >
+    <Preloader />
 
-		<script is:inline>
-			// Theme Initialization (Immediate)
-			const theme = (() => {
-				if (
-					typeof localStorage !== "undefined" &&
-					localStorage.getItem("theme")
-				) {
-					return localStorage.getItem("theme");
-				}
-				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-					return "dark";
-				}
-				return "light";
-			})();
+    <!-- ParticlesBackground removed for performance -->
+    <slot />
 
-			if (theme === "dark") {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
+    <script>
+      import { ClientRouter } from "astro:transitions";
+      import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-			window.localStorage.setItem("theme", theme);
-		</script>
-	</head>
-	<body
-		class="bg-light-bg text-light-textPrimary dark:bg-dark-bg dark:text-dark-textPrimary transition-colors duration-300 font-sans"
-	>
-		<Preloader />
+      gsap.registerPlugin(ScrollTrigger);
 
-		<!-- ParticlesBackground removed for performance -->
-		<slot />
+      // Global Variables for cleanup
+      let lenis: any;
+      let rafId: any;
 
-		<script>
-			import { ClientRouter } from "astro:transitions";
-			import Lenis from "lenis";
-			import { gsap } from "gsap";
-			import { ScrollTrigger } from "gsap/ScrollTrigger";
+      // --- Initialization Function ---
+      function initApp() {
+        // 1. Lenis Setup
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
 
-			gsap.registerPlugin(ScrollTrigger);
+        function raf(time: any) {
+          lenis.raf(time);
+          rafId = requestAnimationFrame(raf);
+        }
+        rafId = requestAnimationFrame(raf);
 
-			// Global Variables for cleanup
-			let lenis: any;
-			let rafId: any;
+        // 3. GSAP Animations (Refresh ScrollTrigger)
+        ScrollTrigger.refresh();
 
-			// --- Initialization Function ---
-			function initApp() {
-				// 1. Lenis Setup
-				lenis = new Lenis({
-					duration: 1.2,
-					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-				});
+        // Re-run stagger animations for new content
+        animateSections();
+      }
 
-				function raf(time: any) {
-					lenis.raf(time);
-					rafId = requestAnimationFrame(raf);
-				}
-				rafId = requestAnimationFrame(raf);
+      function animateSections() {
+        const sections = document.querySelectorAll("section:not(#home)");
+        sections.forEach((section) => {
+          // Verify if already animated to avoid duplicates (optional check)
 
-				// 3. GSAP Animations (Refresh ScrollTrigger)
-				ScrollTrigger.refresh();
+          // Reveal Heading
+          const heading = section.querySelector("h2");
+          if (heading) {
+            gsap.fromTo(
+              heading,
+              { y: 50, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top 85%",
+                },
+              },
+            );
+          }
 
-				// Re-run stagger animations for new content
-				animateSections();
-			}
+          // Stagger children
+          const children = Array.from(section.children).filter(
+            (child) => child !== heading,
+          );
+          gsap.fromTo(
+            children,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              stagger: 0.2,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+              },
+            },
+          );
+        });
+      }
 
-			function animateSections() {
-				const sections =
-					document.querySelectorAll("section:not(#home)");
-				sections.forEach((section) => {
-					// Verify if already animated to avoid duplicates (optional check)
+      // --- Lifecycle Event Listeners ---
 
-					// Reveal Heading
-					const heading = section.querySelector("h2");
-					if (heading) {
-						gsap.fromTo(
-							heading,
-							{ y: 50, opacity: 0 },
-							{
-								y: 0,
-								opacity: 1,
-								duration: 1,
-								ease: "power3.out",
-								scrollTrigger: {
-									trigger: section,
-									start: "top 85%",
-								},
-							},
-						);
-					}
+      // Runs on initial load AND after every navigation
+      document.addEventListener("astro:page-load", () => {
+        initApp();
+      });
 
-					// Stagger children
-					const children = Array.from(section.children).filter(
-						(child) => child !== heading,
-					);
-					gsap.fromTo(
-						children,
-						{ y: 50, opacity: 0 },
-						{
-							y: 0,
-							opacity: 1,
-							duration: 1,
-							stagger: 0.2,
-							ease: "power3.out",
-							scrollTrigger: {
-								trigger: section,
-								start: "top 80%",
-							},
-						},
-					);
-				});
-			}
-
-			// --- Lifecycle Event Listeners ---
-
-			// Runs on initial load AND after every navigation
-			document.addEventListener("astro:page-load", () => {
-				initApp();
-			});
-
-			// Cleanup before swapping (Optional but good for memory)
-			document.addEventListener("astro:before-swap", () => {
-				if (lenis) lenis.destroy();
-				if (rafId) cancelAnimationFrame(rafId);
-				ScrollTrigger.getAll().forEach((t) => t.kill());
-			});
-		</script>
-	</body>
+      // Cleanup before swapping (Optional but good for memory)
+      document.addEventListener("astro:before-swap", () => {
+        if (lenis) lenis.destroy();
+        if (rafId) cancelAnimationFrame(rafId);
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+      });
+    </script>
+  </body>
 </html>

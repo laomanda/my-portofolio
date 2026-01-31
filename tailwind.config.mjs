@@ -32,9 +32,9 @@ export default {
 				},
 				dark: {
 					bg: '#121212',
-					textPrimary: '#E0E0E0',
-					textSecondary: '#A1A1AA',
-					accent: '#DAA520',
+					textPrimary: '#E5E4E2', // Platinum/Silver
+					textSecondary: '#A3A3A3', // Muted Silver
+					accent: '#D4AF37', // Metallic Gold
 					surface: '#1E1E1E'
 				},
 				background: 'hsl(var(--background))',

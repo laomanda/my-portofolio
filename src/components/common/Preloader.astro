@@ -1,101 +1,85 @@
 ---
-import AuroraHero from "../3d/AuroraHero.jsx";
+import Aurora from "../Aurora.jsx";
 ---
 
 <div
-    id="preloader"
-    class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-light-bg dark:bg-dark-bg transition-opacity duration-1000"
+  id="preloader"
+  class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-light-bg dark:bg-dark-bg transition-opacity duration-1000"
 >
-    <!-- 3D Background -->
-    <div class="absolute inset-0 z-0 opacity-60">
-        <AuroraHero client:only="react" />
-    </div>
+  <!-- 3D Background -->
+  <div class="absolute inset-0 z-0 opacity-60 w-full h-full">
+    <Aurora
+      client:only="react"
+      colorStops={["#000000", "#d4af37", "#e5e4e2"]}
+      amplitude={1.5}
+      blend={0.3}
+    />
+  </div>
 
-    <!-- Content -->
-    <div class="relative z-10 flex flex-col items-center gap-4">
-        <div
-            class="text-7xl md:text-9xl font-bold font-serif text-light-textPrimary dark:text-white tracking-widest relative"
-        >
-            <span id="counter">0</span>
-        </div>
-        <div
-            class="w-64 h-1 bg-light-textPrimary/20 dark:bg-white/20 rounded-full overflow-hidden mt-4"
-        >
-            <div
-                id="progress-bar-load"
-                class="h-full bg-light-textPrimary dark:bg-white w-0"
-            >
-            </div>
-        </div>
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col items-center gap-4">
+    <div
+      class="text-7xl md:text-9xl font-bold font-serif text-light-textPrimary dark:text-white tracking-widest relative"
+    >
+      <span id="counter">0</span>
     </div>
+  </div>
 </div>
 
 <script>
-    import { gsap } from "gsap";
+  import { gsap } from "gsap";
 
-    // Use astro:page-load to handle standard checks
-    // We use a global variable to track if the preloader has run in this SESSION (Page Load).
-    // On Hard Refresh, window is reset, so it runs again.
-    // On ClientRouter (SPA) navigation, window persists, so it won't run again.
-    document.addEventListener("astro:page-load", () => {
-        const preloader = document.getElementById("preloader");
-        const counter = document.getElementById("counter");
-        const progressBar = document.getElementById("progress-bar-load");
+  // Use astro:page-load to handle standard checks
+  // We use a global variable to track if the preloader has run in this SESSION (Page Load).
+  // On Hard Refresh, window is reset, so it runs again.
+  // On ClientRouter (SPA) navigation, window persists, so it won't run again.
+  document.addEventListener("astro:page-load", () => {
+    const preloader = document.getElementById("preloader");
+    const counter = document.getElementById("counter");
 
-        const markPreloaderDone = () => {
-            // @ts-ignore
-            window.preloaderDone = true;
-            window.dispatchEvent(new Event("preloader:done"));
-        };
+    const markPreloaderDone = () => {
+      // @ts-ignore
+      window.preloaderDone = true;
+      window.dispatchEvent(new Event("preloader:done"));
+    };
 
-        // Use global window variable instead of sessionStorage
-        // @ts-ignore
-        if (window.hasPreloaderShown) {
-            // Already shown in this window session (soft nav) -> Hide immediately
-            if (preloader) preloader.style.display = "none";
-            markPreloaderDone();
-        } else {
-            // First time in this window session (hard reload or new tab) -> Run Animation
+    // Use global window variable instead of sessionStorage
+    // @ts-ignore
+    if (window.hasPreloaderShown) {
+      // Already shown in this window session (soft nav) -> Hide immediately
+      if (preloader) preloader.style.display = "none";
+      markPreloaderDone();
+    } else {
+      // First time in this window session (hard reload or new tab) -> Run Animation
 
-            // Set flag
-            // @ts-ignore
-            window.hasPreloaderShown = true;
+      // Set flag
+      // @ts-ignore
+      window.hasPreloaderShown = true;
 
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    // Exit Animation
-                    gsap.to(preloader, {
-                        yPercent: -100,
-                        duration: 1.2,
-                        ease: "power4.inOut",
-                        onComplete: () => {
-                            if (preloader) preloader.style.display = "none";
-                            markPreloaderDone();
-                        },
-                    });
-                },
-            });
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Exit Animation
+          gsap.to(preloader, {
+            yPercent: -100,
+            duration: 1.2,
+            ease: "power4.inOut",
+            onComplete: () => {
+              if (preloader) preloader.style.display = "none";
+              markPreloaderDone();
+            },
+          });
+        },
+      });
 
-            if (counter && progressBar) {
-                // Counter Animation
-                tl.to(counter, {
-                    innerHTML: 100,
-                    duration: 3,
-                    snap: { innerHTML: 1 },
-                    ease: "power2.inOut",
-                });
-
-                // Progress Bar Animation (Synced)
-                tl.to(
-                    progressBar,
-                    {
-                        width: "100%",
-                        duration: 3,
-                        ease: "power2.inOut",
-                    },
-                    "<",
-                );
-            }
-        }
-    });
+      if (counter) {
+        // Counter Animation
+        tl.to(counter, {
+          innerHTML: 100,
+          duration: 3,
+          snap: { innerHTML: 1 },
+          ease: "power2.inOut",
+        });
+      }
+    }
+  });
 </script>

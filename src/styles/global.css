@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   html {
     @apply scroll-smooth;
@@ -95,25 +93,15 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Custom Scrollbar - Luxurious & Thin */
+/* Hide Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-zinc-700 rounded-full;
-  transition: background-color 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-zinc-600;
-}
-
-
 
 @layer base {
   * {
@@ -156,21 +144,23 @@ html.lenis body {
 
 .lustre-light {
   --lustre-gradient: linear-gradient(
-    120deg,
-    #b68a12 0%,
-    #f7e3a1 30%,
-    #d4af37 60%,
-    #b68a12 100%
+    110deg,
+    #bf953f 0%,
+    #fcf6ba 25%,
+    #b38728 50%,
+    #fbf5b7 75%,
+    #bf953f 100%
   );
 }
 
 .dark .dark\:lustre-dark {
   --lustre-gradient: linear-gradient(
-    120deg,
-    #ffe08a 0%,
-    #fff3c4 30%,
-    #ffd24d 60%,
-    #d4af37 100%
+    110deg,
+    #bf953f 0%,
+    #fcf6ba 25%,
+    #b38728 50%,
+    #fbf5b7 75%,
+    #bf953f 100%
   );
 }
 
@@ -193,3 +183,4 @@ html.lenis body {
     #e6e6e6 100%
   );
 }
+
