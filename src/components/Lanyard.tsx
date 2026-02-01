@@ -26,7 +26,7 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
   }, []);
 
   return (
-    <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center pointer-events-auto cursor-grab active:cursor-grabbing" style={{ touchAction: 'pan-y' }}>
+    <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center pointer-events-auto cursor-grab active:cursor-grabbing" style={{ touchAction: 'none' }}>
       <Canvas
         camera={{ position: position, fov: fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
