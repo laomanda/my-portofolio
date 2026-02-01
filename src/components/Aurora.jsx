@@ -118,7 +118,7 @@ export default function Aurora(props) {
 
   useEffect(() => {
     const ctn = ctnDom.current;
-    if (!ctn) return;
+    if (!ctn || window.innerWidth < 768) return; // Disable on mobile for performance
 
     const renderer = new Renderer({
       alpha: true,
