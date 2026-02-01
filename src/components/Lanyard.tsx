@@ -26,7 +26,7 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
   }, []);
 
   return (
-    <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center pointer-events-auto cursor-grab active:cursor-grabbing" style={{ touchAction: 'none' }}>
+    <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center pointer-events-auto cursor-grab active:cursor-grabbing" style={{ touchAction: 'pan-y' }}>
       <Canvas
         camera={{ position: position, fov: fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
@@ -35,7 +35,7 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={1 / 60}>
-          <Band isMobile={isMobile} groupPosition={isMobile ? [0, 4, 0] : groupPosition} />
+          <Band isMobile={isMobile} groupPosition={isMobile ? [0, 5.5, 0] : groupPosition} />
         </Physics>
         <Environment blur={0.75}>
           <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
