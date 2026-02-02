@@ -1,88 +1,166 @@
 ---
 import { text } from "../../data/i18n";
+import { LogoLoop } from "../LogoLoop";
+import LustreText from "../ui/lustretext";
 
 const t = text.skills;
 
-const skills = [
-    {
-        name: "HTML5",
-        path: "M1.5 0h29l-3 27.2l-13 3.6l-13-3.6l-3-27.2z m7.5 7.5l0.8 9.5l8.2 2.2l8.2-2.2l0.4-5.5h-5.2l-0.2 1.8l-3.2 0.8l-3.2-0.8l-0.3-4.3l12.4 0l0.5-5l-18.7 0l0 0z",
-        color: "text-orange-500",
-        viewBox: "0 0 32 32",
-    },
-    {
-        name: "CSS3",
-        path: "M1.5 0h29l-2.8 27.2l-13.2 3.6l-13.2-3.6l-2.8-27.2z m7.4 22.4l-0.3-3.6l10.9 0l0.5-5.2l-11.8 0l-0.3-3.6l12.4 0l0.5-5l-18.5 0l0.8 12.2l12.9 0l-0.2 1.6l-3.2 0.8l-3.2-0.8l-0.2-1.9l-3.6 0l0.6 5.2l6.4 1.8l6.4-1.8l3.6-11.8z",
-        color: "text-blue-500",
-        viewBox: "0 0 32 32",
-    },
-    {
-        name: "JavaScript",
-        path: "M0 0h32v32h-32z m27.3 27.3v-22.6h-22.6v22.6h22.6z m-12-19.3h5.3v10.7c0 2.9-1.6 4.3-4.3 4.3-2.1 0-3.6-1.1-4.1-2.9l3.5-1.4c0.1 0.7 0.6 1.1 1.6 1.1 1 0 1.6-0.5 1.6-1.6v-10.2z m9.3 0h3.5v12.4c0 1.5-0.1 2.3-0.4 2.9-0.5 1.4-1.9 2.1-4.2 2.1-2.9 0-4.6-1.3-5-3.6l3.4-1.4c0.2 1.1 0.7 1.8 1.9 1.8 1.1 0 1.6-0.5 1.6-1.5v-1.1c-0.6 0.9-1.5 1.3-2.6 1.3-2.3 0-3.9-1.6-3.9-4.3 0-2.8 1.6-4.5 4-4.5 1.1 0 2 0.4 2.6 1.2l0-1.2z m-12.7 8.3c-0.1-1.1-0.7-1.7-1.8-1.7-1.1 0-1.8 0.6-1.8 1.7 0 1.1 0.7 1.7 1.8 1.7 1.1 0 1.8-0.6 1.8-1.7z",
-        color: "text-yellow-400",
-        viewBox: "0 0 32 32",
-    },
-    {
-        name: "Astro",
-        path: "M16.96 5.161l-4.435 15.54h-0.211l-4.435-15.54-6.417 21.01h4.943l1.716-5.633h8.349l1.716 5.633h4.945z m-4.435 4.604l2.903 9.539h-5.806z m17.47 13.62h-2.109l-1.636-2.276c-0.279 0.175-0.575 0.322-0.887 0.444-0.313 0.122-0.627 0.183-0.941 0.183-0.523 0-0.957-0.147-1.303-0.439-0.347-0.293-0.52-0.75-0.52-1.372 0-0.296 0.04-0.569 0.12-0.817 0.08-0.248 0.198-0.468 0.354-0.662s0.344-0.359 0.564-0.493c0.22-0.134 0.469-0.236 0.748-0.306l1.295-0.328c0.052-0.222 0-0.413-0.156-0.574-0.156-0.161-0.418-0.242-0.784-0.242-0.349 0-0.62 0.09-0.811 0.269s-0.301 0.41-0.328 0.693h-1.886c0.036-0.426 0.131-0.816 0.285-1.171 0.153-0.354 0.37-0.662 0.65-0.923 0.28-0.262 0.626-0.468 1.037-0.618s0.871-0.225 1.375-0.225c0.963 0 1.708 0.231 2.235 0.693 0.526 0.462 0.789 1.157 0.789 2.084v5.926z m-2.315-1.579c0.24-0.039 0.456-0.122 0.648-0.247s0.34-0.288 0.446-0.489v-1.182l-1.026 0.258c-0.43 0.107-0.645 0.321-0.645 0.639 0 0.143 0.052 0.265 0.156 0.365s0.235 0.151 0.392 0.151c0.01 0.218 0.02 0.36 0.029 0.505z",
-        color: "text-orange-600",
-        viewBox: "0 0 32 32",
-    },
-    {
-        name: "React",
-        path: "M16 2a14 14 0 1 0 14 14a14 14 0 0 0-14-14z m0 2.5a1.5 1.5 0 1 1-1.5 1.5a1.5 1.5 0 0 1 1.5-1.5z m0 5a2.5 2.5 0 1 1-2.5 2.5a2.5 2.5 0 0 1 2.5-2.5z m0 9a2 2 0 1 1-2 2a2 2 0 0 1 2-2z",
-        color: "text-cyan-400",
-        viewBox: "0 0 32 32",
-    },
-    {
-        name: "Tailwind",
-        path: "M8.5 4.5c3.5 0 6.5 2 8 5c-2.5-1.5-5-1.5-7-0.5-2 1-3 3-5 5-2-3-1-6 4-9.5z m8 8c3.5 0 6.5 2 8 5c-2.5-1.5-5-1.5-7-0.5-2 1-3 3-5 5-2-3-1-6 4-9.5z",
-        color: "text-cyan-500",
-        viewBox: "0 0 24 24",
-    },
-    {
-        name: "Git",
-        path: "M15.6 0l-15.6 15.6 14.2 14.2 2.3-2.3-2.7-2.7 7.7-7.7c0.8 0.3 1.6 0 2.1-0.5 0.8-0.8 0.8-2.1 0-2.9s-2.1-0.8-2.9 0c-0.5 0.5-0.8 1.3-0.5 2.1l-7.2 7.2-2.1-2.1 6.8-6.8c0.1 0 0.2 0 0.3 0 1.1 0 2-0.9 2-2s-0.9-2-2-2-2 0.9-2 2c0 0.1 0 0.2 0 0.3l-5.6 5.6-5.8-5.8 11-11z",
-        color: "text-red-500",
-        viewBox: "0 0 32 32",
-    },
-    {
-        name: "TypeScript",
-        path: "M2 0h28v32h-32z m23 23.5h-5.9v-13h-4v-3h14v3h-4.1z m-11 5h-4v-3h4v-3h-4v-3h4v-3h-4v-3h4v-3h-4v18z",
-        color: "text-blue-600",
-        viewBox: "0 0 32 32",
-    }, // Placeholder paths, simplistic
+// Languages & Core
+const languageLogos = [
+  { src: "/icons/languange/Html.png", alt: "HTML5" },
+  { src: "/icons/languange/Css-Vanila.png", alt: "CSS3" },
+  { src: "/icons/languange/Js.png", alt: "JavaScript" },
+  { src: "/icons/languange/Php.png", alt: "PHP" },
+  { src: "/icons/languange/mysql.svg", alt: "MySQL" },
+];
+
+// Frameworks & Libraries
+const frameworkLogos = [
+  { src: "/icons/framework/React.svg", alt: "React" },
+  { src: "/icons/framework/tailwindcss.svg", alt: "Tailwind CSS" },
+  { src: "/icons/framework/Node.js-Logo.png", alt: "Node.js" },
+  { src: "/icons/framework/bootsrap.png", alt: "Bootstrap" },
+  { src: "/icons/framework/laravel.png", alt: "Laravel" },
+  { src: "/icons/framework/typescript-logo.png", alt: "TypeScript" },
+];
+
+// Development Tools
+const toolLogos = [
+  { src: "/icons/tools/git_bash.svg", alt: "Git" },
+  { src: "/icons/tools/github.svg", alt: "GitHub" },
+  { src: "/icons/tools/vscode.svg", alt: "VS Code" },
+  { src: "/icons/tools/Vercel.svg", alt: "Vercel" },
+  { src: "/icons/tools/chatgpt.svg", alt: "ChatGPT" },
+  { src: "/icons/tools/google.svg", alt: "Google" },
 ];
 ---
 
-<section
-    id="skills"
-    class="py-20 bg-light-surface dark:bg-dark-surface transition-colors duration-300"
->
-    <div class="max-w-7xl mx-auto px-6">
-        <h2
-            class="text-3xl md:text-4xl font-serif font-bold text-center mb-12 text-light-textPrimary dark:text-dark-textPrimary"
-        >
-            {t.title}
-        </h2>
+<section id="skills" class="py-24 bg-[#121212] relative overflow-hidden">
+  <div
+    class="absolute top-1/4 -right-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none"
+  >
+  </div>
+  <div
+    class="absolute bottom-1/4 -left-64 w-96 h-96 bg-[#E5E4E2]/5 rounded-full blur-3xl pointer-events-none"
+  >
+  </div>
 
-        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
-            {
-                skills.map((skill) => (
-                    <div class="px-8 py-4 bg-light-bg dark:bg-dark-bg rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-3 hover:shadow-md transition-all cursor-default hover:-translate-y-1 group">
-                        <svg
-                            class={`w-8 h-8 ${skill.color} group-hover:scale-110 transition-transform`}
-                            viewBox={skill.viewBox}
-                            fill="currentColor"
-                        >
-                            <path d={skill.path} />
-                        </svg>
-                        <span class="font-medium text-light-textPrimary dark:text-dark-textPrimary">
-                            {skill.name}
-                        </span>
-                    </div>
-                ))
-            }
-        </div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div
+      class="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-700 mb-6 justify-center"
+    >
+      <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+      <span
+        class="text-[#D4AF37] font-display tracking-[0.2em] text-sm uppercase"
+        >Arsitektur & Alat</span
+      >
+      <span class="h-px w-12 bg-[#D4AF37]/60"></span>
     </div>
+
+    <h2 class="text-center mb-16">
+      <LustreText
+        client:visible
+        text={t.title}
+        className="text-4xl md:text-5xl font-display font-bold text-[#E5E4E2]"
+      />
+    </h2>
+
+    <div class="space-y-16">
+      {/* Languages Row */}
+      <div class="space-y-6">
+        <h3
+          class="text-xs md:text-sm font-display text-neutral-500 border-l-2 border-[#D4AF37] pl-4 uppercase tracking-[0.2em] mb-4"
+        >
+          Logika & Bahasa Utama
+        </h3>
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#121212] via-[#121212]/80 to-transparent z-10 pointer-events-none"
+          >
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#121212] via-[#121212]/80 to-transparent z-10 pointer-events-none"
+          >
+          </div>
+          <LogoLoop
+            client:visible
+            logos={languageLogos}
+            speed={45}
+            direction="left"
+            logoHeight={50}
+            gap={80}
+            pauseOnHover={true}
+            fadeOut={false}
+            scaleOnHover={false}
+            className="[&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-80 [&_li:hover_img]:opacity-100"
+            ariaLabel="Programming Languages"
+          />
+        </div>
+      </div>
+
+      {/* Frameworks Row */}
+      <div class="space-y-6">
+        <h3
+          class="text-xs md:text-sm font-display text-neutral-500 border-l-2 border-[#D4AF37] pl-4 uppercase tracking-[0.2em] mb-4"
+        >
+          Framework & Ekosistem
+        </h3>
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none"
+          >
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none"
+          >
+          </div>
+          <LogoLoop
+            client:visible
+            logos={frameworkLogos}
+            speed={35}
+            direction="right"
+            logoHeight={55}
+            gap={80}
+            pauseOnHover={true}
+            fadeOut={false}
+            scaleOnHover={false}
+            className="[&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-80 [&_li:hover_img]:opacity-100"
+            ariaLabel="Frameworks and Libraries"
+          />
+        </div>
+      </div>
+
+      {/* Tools Row */}
+      <div class="space-y-6">
+        <h3
+          class="text-xs md:text-sm font-display text-neutral-500 border-l-2 border-[#D4AF37] pl-4 uppercase tracking-[0.2em] mb-4"
+        >
+          Alat & Infrastruktur
+        </h3>
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none"
+          >
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none"
+          >
+          </div>
+          <LogoLoop
+            client:visible
+            logos={toolLogos}
+            speed={40}
+            direction="left"
+            logoHeight={45}
+            gap={80}
+            pauseOnHover={true}
+            fadeOut={false}
+            scaleOnHover={false}
+            className="[&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-80 [&_li:hover_img]:opacity-100"
+            ariaLabel="Development Tools"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

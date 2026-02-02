@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { useGLTF, useTexture, Environment, Lightformer, Decal } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
@@ -56,7 +56,14 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, groupPosition = [
   // Load assets from public path
   const { nodes, materials } = useGLTF(cardGLB);
   const texture = useTexture(lanyardTexture);
+  const userPhoto = useTexture('/assets/lanyard/Jakkob.png');
   
+  // Fix texture orientation and scaling
+  userPhoto.flipY = false;
+  userPhoto.center.set(0.5, 0.5); 
+  // Rotate 180 degrees to fix upside down orientation
+  userPhoto.rotation = Math.PI;
+
   const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]));
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
@@ -87,19 +94,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, groupPosition = [
         const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
         ref.current.lerped.lerp(ref.current.translation(), delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
       });
-        // Important: Update curve points relative to the group position? 
-        // No, translation() returns world coordinates. 
-        // But the Band mesh is rendered at world coordinates? NO, <mesh ref={band}> is a child of... the fragment/root.
-        // Wait, mesh ref={band} is OUTSIDE the group. 
-        // Lines 90-93 copy translation (world pos).
-        // Line 94 setPoints.
-        // So the Band mesh should be at [0,0,0] world.
-        // The Lanyard function returns:
-        // <>
-        //   <group position={groupPosition}> ... </group>
-        //   <mesh ref={band}> ... </mesh>
-        // <>
-        // This structure looks correct.
       curve.points[0].copy(j3.current.translation());
       curve.points[1].copy(j2.current.lerped);
       curve.points[2].copy(j1.current.lerped);
@@ -132,7 +126,22 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, groupPosition = [
             onPointerDown={(e) => (e.target.setPointerCapture(e.pointerId), drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))))}
           >
             <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial map={materials.base.map} map-anisotropy={isMobile ? 1 : 16} clearcoat={1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.5} />
+              {/* Back/Body: Silver Material */}
+              <meshPhysicalMaterial 
+                color="#e0e0e0" 
+                clearcoat={1} 
+                clearcoatRoughness={0.15} 
+                roughness={0.3} 
+                metalness={0.8} 
+              />
+              {/* Front: Photo Decal */}
+              {/* Card dimensions are roughly 1.6 width x 2.25 height (collider args are half-extents) */}
+              <Decal 
+                position={[0, 0, 0.09]} 
+                rotation={[0, 0, 0]} 
+                scale={[1.6, 2.25, 1.5]} 
+                map={userPhoto} 
+              />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />

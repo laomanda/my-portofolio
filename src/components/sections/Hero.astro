@@ -3,6 +3,8 @@ import Aurora from "../Aurora.jsx";
 import TextType from "../TextType.jsx";
 import LustreText from "../ui/lustretext";
 import Lanyard from "../Lanyard";
+import { Mail, LayoutGrid } from "@lucide/astro";
+import { Badge } from "../ui/badge";
 ---
 
 <section
@@ -25,8 +27,21 @@ import Lanyard from "../Lanyard";
   >
     <!-- Left Column: Typography (Order 2 on Mobile, 1 on Desktop) -->
     <div
-      class="flex flex-col items-center lg:items-start text-center lg:text-left gap-8 order-2 lg:order-1 pt-64 lg:pt-0"
+      class="flex flex-col items-center lg:items-start text-center lg:text-left gap-8 order-2 lg:order-1"
     >
+      <div
+        class="opacity-0 animate-fade-in-up animation-delay-100 flex justify-center lg:justify-start w-full"
+      >
+        <Badge
+          client:load
+          shiny={true}
+          variant="secondary"
+          className="mb-4 bg-gradient-to-r from-dark-accent/10 to-transparent backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 shadow-[0_0_15px_rgba(212,175,55,0.2)] tracking-[0.2em] font-display font-semibold px-6 py-2 rounded-full uppercase"
+        >
+          Tersedia Untuk Bekerja
+        </Badge>
+      </div>
+
       <div class="opacity-0 animate-fade-in-up animation-delay-200">
         <LustreText
           client:load
@@ -58,6 +73,47 @@ import Lanyard from "../Lanyard";
         textClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F7E3A1] to-[#E5E4E2] drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]"
         className="text-xl md:text-2xl lg:text-3xl uppercase tracking-[0.2em] font-display font-bold"
       />
+
+      <!-- Slogan -->
+      <p
+        class="text-dark-textSecondary/90 text-sm md:text-base font-serif italic tracking-wide max-w-lg mt-6 mb-2 leading-relaxed"
+      >
+        "Mewujudkan ide visioner menjadi realitas digital yang memukau, presisi,
+        dan berkinerja tinggi."
+      </p>
+
+      <!-- Premium CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
+        <a
+          href="#contact"
+          class="group relative overflow-hidden px-8 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7E3A1] text-dark-bg font-bold font-display tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_25px_rgba(212,175,55,0.6)] transition-all duration-300 text-center flex items-center justify-center gap-2"
+        >
+          <!-- Shine Effect -->
+          <div
+            class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/40 to-transparent z-10"
+          >
+          </div>
+          <span class="relative z-20 flex items-center gap-2">
+            <Mail
+              class="w-5 h-5 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
+            />
+            KONTAK
+          </span>
+        </a>
+        <a
+          href="#projects"
+          class="relative px-8 py-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-[#E5E4E2] font-semibold font-display tracking-widest hover:bg-white/10 hover:border-[#D4AF37]/50 hover:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all duration-300 text-center group flex items-center justify-center gap-2"
+        >
+          <LayoutGrid
+            class="w-5 h-5 transition-transform duration-500 group-hover:rotate-180"
+          />
+          PROJECTS
+          <span
+            class="inline-block group-hover:translate-x-1 transition-transform"
+            >→</span
+          >
+        </a>
+      </div>
     </div>
   </div>
 
@@ -66,26 +122,16 @@ import Lanyard from "../Lanyard";
 
 <!-- Lanyard Overlay (Full Screen) - Closer camera, higher z-index -->
 <div
-  class="absolute inset-0 h-full z-50 pointer-events-none flex items-center justify-center"
+  class="absolute inset-0 h-full z-50 pointer-events-none hidden lg:flex items-center justify-center"
 >
-  <!-- Mobile Scroll Zones (Left & Right) -->
-  <div
-    class="absolute inset-y-0 left-0 w-[15%] z-[60] pointer-events-auto lg:hidden"
-  >
-  </div>
-  <div
-    class="absolute inset-y-0 right-0 w-[15%] z-[60] pointer-events-auto lg:hidden"
-  >
-  </div>
-
-  <!-- Lanyard Container -->
-  <div class="w-full h-full pointer-events-auto">
+  <!-- Lanyard Container (Restricted to Right Half on Desktop to unblock Left Content) -->
+  <div class="w-full lg:w-1/2 ml-auto h-full pointer-events-auto">
     <Lanyard
       client:only="react"
       fov={20}
       position={[0, 0, 15]}
       gravity={[0, -40, 0]}
-      groupPosition={[2.5, 4, 0]}
+      groupPosition={[0, 4, 0]}
       transparent
     />
   </div>

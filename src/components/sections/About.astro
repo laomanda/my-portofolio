@@ -1,66 +1,139 @@
 ---
 import { text } from "../../data/i18n";
-import Button from "../common/Button.astro";
+
+import ProfileCard from "../ProfileCard";
+import AboutTabs from "../ui/AboutTabs";
+
+import LustreText from "../ui/lustretext";
 
 const t = text.about;
+const GITHUB_USERNAME = "laomanda";
+
+// Server-side Data Fetching
+let githubUser = null;
+let totalContributions = 0;
+let yearsActive = 0;
+
+try {
+  // 1. Fetch User Profile
+  const userRes = await fetch(
+    `https://api.github.com/users/${GITHUB_USERNAME}`,
+  );
+  if (userRes.ok) {
+    githubUser = await userRes.json();
+
+    // Calculate Years Active
+    const createdDate = new Date(githubUser.created_at);
+    const currentDate = new Date();
+    yearsActive = currentDate.getFullYear() - createdDate.getFullYear();
+  }
+
+  // 2. Fetch Contributions (Using external API proxy for simplicity)
+  // This API returns a 'total' object with counts per year
+  const contribRes = await fetch(
+    `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`,
+  );
+  if (contribRes.ok) {
+    const data = await contribRes.json();
+    // Sum up all yearly totals if available
+    if (data.total && typeof data.total === "object") {
+      totalContributions = Object.values(data.total).reduce(
+        (a: any, b: any) => a + b,
+        0,
+      ) as number;
+    }
+  }
+} catch (e) {
+  console.error("GitHub Data Fetch Failed:", e);
+}
+
+// Fallback / Default Data
+const avatar =
+  githubUser?.avatar_url ||
+  "https://placehold.co/500x500/1a1a1a/D4AF37?text=Jakkob"; // Custom placeholder
+const repoCount = githubUser?.public_repos || "25+";
+const displayContributions =
+  totalContributions > 0 ? totalContributions.toLocaleString() : "1,000+";
+const displayYears = yearsActive > 0 ? yearsActive : "3+";
+
+// Styles
+const goldText = "text-[#D4AF37]"; // Using specific gold hex for consistency
+const silverText = "text-[#E5E4E2]";
+const mutedText = "text-neutral-400";
 ---
 
 <section
-    id="about"
-    class="py-20 bg-light-bg dark:bg-dark-bg transition-colors duration-300"
+  id="about"
+  class="relative py-24 md:py-32 bg-[#121212] overflow-hidden"
 >
+  {/* Decorative Background Elements */}
+  <div
+    class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+  >
     <div
-        class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+      class="absolute top-1/4 -left-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl"
     >
-        <!-- Image -->
-        <div class="relative group">
-            <div
-                class="absolute inset-0 bg-light-accent dark:bg-dark-accent rounded-3xl transform rotate-6 scale-95 opacity-20 group-hover:rotate-3 transition-transform duration-500"
-            >
-            </div>
-            <div
-                class="relative bg-gray-200 dark:bg-gray-800 rounded-3xl overflow-hidden aspect-[4/5] shadow-lg"
-            >
-                <img
-                    src="https://placehold.co/400x500"
-                    alt="Jakkob Profile"
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                />
-            </div>
-        </div>
-
-        <!-- Content -->
-        <div>
-            <h2
-                class="text-3xl md:text-4xl font-serif font-bold mb-6 text-light-textPrimary dark:text-dark-textPrimary"
-            >
-                {t.title}
-            </h2>
-            <p
-                class="text-lg text-light-textSecondary dark:text-dark-textSecondary leading-relaxed mb-8"
-            >
-                {t.desc}
-            </p>
-
-            <div class="space-y-4 mb-8">
-                <!-- Additional details if needed -->
-                <div
-                    class="flex items-center gap-4 text-light-textPrimary dark:text-dark-textPrimary"
-                >
-                    <span class="font-bold">Location:</span>
-                    <span>Indonesia</span>
-                </div>
-                <div
-                    class="flex items-center gap-4 text-light-textPrimary dark:text-dark-textPrimary"
-                >
-                    <span class="font-bold">Email:</span>
-                    <span>contact@example.com</span>
-                </div>
-            </div>
-
-            <Button href="/cv.pdf" variant="primary" download>
-                {t.downloadCv}
-            </Button>
-        </div>
     </div>
+    <div
+      class="absolute bottom-1/4 -right-64 w-96 h-96 bg-[#E5E4E2]/5 rounded-full blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center z-10"
+  >
+    {/* Left Column: Profile Card */}
+    <div
+      class="w-full flex justify-center lg:justify-start max-w-[320px] lg:max-w-none mx-auto lg:mx-0 [--card-height:450px] [--card-width:100%] lg:[--card-height:540px] lg:[--card-width:auto]"
+    >
+      <ProfileCard
+        client:only="react"
+        avatarUrl="/saya/Jakkob.png"
+        name={githubUser?.name || "Jakkob Panjaitan"}
+        title={githubUser?.bio || "Frontend Developer"}
+        handle={GITHUB_USERNAME}
+        status="Open to work"
+        behindGlowEnabled={true}
+        behindGlowColor="#D4AF37"
+        enableTilt={true}
+      />
+    </div>
+
+    {/* Right Column: Content */}
+    <div class="text-left">
+      {/* Header */}
+      <div class="space-y-4 mb-8">
+        <div
+          class="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-700"
+        >
+          <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+          <span
+            class="text-[#D4AF37] font-display tracking-[0.2em] text-sm uppercase"
+            >Siapa Saya</span
+          >
+        </div>
+        {/* LustreText Title */}
+        <div class="relative">
+          <LustreText
+            client:visible
+            text={t.title}
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#E5E4E2]"
+          />
+        </div>
+      </div>
+
+      {/* Interactive Tabs */}
+      <AboutTabs
+        client:visible
+        description={t.desc}
+        githubData={{
+          repoCount,
+          contributions: displayContributions,
+          yearsActive: displayYears,
+          username: GITHUB_USERNAME,
+        }}
+      />
+    </div>
+  </div>
 </section>
