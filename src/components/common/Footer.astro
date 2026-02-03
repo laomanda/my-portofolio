@@ -1,47 +1,185 @@
 ---
-import { text } from "../../data/i18n";
-import { Github, Linkedin, Instagram } from "@lucide/astro";
-
-const t = text.footer;
+import { Github, Instagram, Phone } from "@lucide/astro";
+import StaggerChars from "../ui/stagger-chars";
 ---
 
 <footer
-    class="bg-light-bg dark:bg-dark-bg py-8 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300"
+  class="relative w-full min-h-[90vh] bg-[#121212] flex flex-col justify-between px-6 py-20 md:px-12 lg:px-24 overflow-hidden"
 >
+  {/* Decorative Background Elements */}
+  <div
+    id="footer-bg"
+    class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+  >
     <div
-        class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4"
+      class="absolute top-1/4 -right-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl"
     >
-        <p
-            class="text-sm text-light-textSecondary dark:text-dark-textSecondary text-center md:text-left"
-        >
-            {t.copyright}
-        </p>
-
-        <div class="flex items-center gap-6">
-            <a
-                href="https://github.com"
-                target="_blank"
-                aria-label="GitHub"
-                class="text-light-textSecondary hover:text-light-accent dark:text-dark-textSecondary dark:hover:text-dark-accent transition-colors"
-            >
-                <Github class="w-6 h-6" />
-            </a>
-            <a
-                href="https://linkedin.com"
-                target="_blank"
-                aria-label="LinkedIn"
-                class="text-light-textSecondary hover:text-light-accent dark:text-dark-textSecondary dark:hover:text-dark-accent transition-colors"
-            >
-                <Linkedin class="w-6 h-6" />
-            </a>
-            <a
-                href="https://instagram.com"
-                target="_blank"
-                aria-label="Instagram"
-                class="text-light-textSecondary hover:text-light-accent dark:text-dark-textSecondary dark:hover:text-dark-accent transition-colors"
-            >
-                <Instagram class="w-6 h-6" />
-            </a>
-        </div>
     </div>
+    <div
+      class="absolute bottom-1/4 -left-64 w-96 h-96 bg-[#E5E4E2]/5 rounded-full blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative z-10 flex flex-col lg:flex-row justify-between gap-16 w-full max-w-[90rem] mx-auto flex-1 items-center"
+  >
+    {/* Left Column: Quote */}
+    <div
+      id="footer-left"
+      class="flex flex-col gap-8 w-full lg:w-auto max-w-4xl"
+    >
+      <h2
+        class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-[#E5E4E2] leading-[1.1]"
+      >
+        Mengubah Ide Menjadi <span class="text-[#D4AF37]"
+          >Realitas Digital.</span
+        >
+      </h2>
+    </div>
+
+    {/* Right Column: Menu & Socials */}
+    <div
+      id="footer-right"
+      class="flex flex-col gap-8 lg:items-start text-left shrink-0"
+    >
+      {/* Menu */}
+      <nav class="flex flex-col gap-6">
+        <a href="#home" class="w-fit">
+          <StaggerChars
+            client:only="react"
+            text="Beranda"
+            hoverText="Beranda"
+            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
+            hoverClassName="text-[#D4AF37]"
+          />
+        </a>
+        <a href="#about" class="w-fit">
+          <StaggerChars
+            client:only="react"
+            text="Tentang"
+            hoverText="Tentang"
+            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
+            hoverClassName="text-[#D4AF37]"
+          />
+        </a>
+        <a href="#projects" class="w-fit">
+          <StaggerChars
+            client:only="react"
+            text="Proyek"
+            hoverText="Proyek"
+            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
+            hoverClassName="text-[#D4AF37]"
+          />
+        </a>
+        <a href="#contact" class="w-fit">
+          <StaggerChars
+            client:only="react"
+            text="Kontak"
+            hoverText="Kontak"
+            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
+            hoverClassName="text-[#D4AF37]"
+          />
+        </a>
+      </nav>
+
+      {/* Socials */}
+      <div class="flex items-center gap-6 mt-4">
+        <a
+          href="https://wa.me/62895321205351"
+          target="_blank"
+          class="group p-4 rounded-full border border-white/10 hover:border-[#25D366]/50 hover:bg-[#25D366]/10 transition-all duration-300"
+        >
+          <Phone
+            class="w-6 h-6 text-[#E5E4E2] group-hover:text-[#25D366] transition-colors"
+          />
+        </a>
+        <a
+          href="https://www.instagram.com/jakk_0b/"
+          target="_blank"
+          class="group p-4 rounded-full border border-white/10 hover:border-[#E1306C]/50 hover:bg-[#E1306C]/10 transition-all duration-300"
+        >
+          <Instagram
+            class="w-6 h-6 text-[#E5E4E2] group-hover:text-[#E1306C] transition-colors"
+          />
+        </a>
+        <a
+          href="https://github.com/laomanda"
+          target="_blank"
+          class="group p-4 rounded-full border border-white/10 hover:border-white/50 hover:bg-white/10 transition-all duration-300"
+        >
+          <Github
+            class="w-6 h-6 text-[#E5E4E2] group-hover:text-white transition-colors"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {/* Bottom Bar */}
+  <div
+    class="relative z-10 w-full max-w-[90rem] mx-auto pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-neutral-500 text-sm"
+  >
+    <p>
+      &copy; {new Date().getFullYear()} Jakkob Panjaitan. All Rights Reserved.
+    </p>
+    <p>Designed & Built with Passion.</p>
+  </div>
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("astro:page-load", () => {
+      const footer = document.querySelector("footer");
+      const bg = document.getElementById("footer-bg");
+      const leftCol = document.getElementById("footer-left");
+      const rightCol = document.getElementById("footer-right");
+
+      if (footer && bg && leftCol && rightCol) {
+        // Reset initial state to avoid flash
+        gsap.set([leftCol, rightCol], { y: 100, opacity: 0 });
+
+        // 1. Background Parallax (Scrub)
+        // Moves the background slower than the scroll-speed
+        gsap.fromTo(
+          bg,
+          { yPercent: -20, scale: 1.1 },
+          {
+            yPercent: 0,
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: footer,
+              start: "top bottom",
+              end: "bottom bottom",
+              scrub: 1.5,
+            },
+          },
+        );
+
+        // 2. Content Reveal (Animation)
+        // Triggers when footer enters the viewport (75% point)
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: footer,
+            start: "top 75%", // Triggers when footer top hits 75% of viewport height
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        tl.to([leftCol, rightCol], {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          stagger: 0.3,
+          ease: "power4.out",
+        });
+
+        // Ensure triggers are recalculated after load
+        ScrollTrigger.refresh();
+      }
+    });
+  </script>
 </footer>

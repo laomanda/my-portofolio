@@ -102,7 +102,7 @@ const TiltCard = ({ project, onClick }: { project: Project; onClick: () => void 
                     </div>
                     {project.size === 'large' && (
                         <Badge variant="outline" className="bg-white/50 dark:bg-black/50 backdrop-blur-md">
-                            Featured
+                            Unggulan
                         </Badge>
                     )}
                 </div>
@@ -191,7 +191,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                         {/* Description */}
                         <div>
                             <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
-                                <span className="w-8 h-[1px] bg-gray-400"></span> About
+                                <span className="w-8 h-[1px] bg-gray-400"></span> Tentang
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                                 {project.description}
@@ -202,18 +202,18 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-5 rounded-2xl bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20">
                                 <h4 className="text-red-600 dark:text-red-400 font-bold mb-2 flex items-center gap-2">
-                                    <Layers size={16} /> Challenge
+                                    <Layers size={16} /> Tantangan
                                 </h4>
                                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                    {project.challenge || "No specific challenge details provided."}
+                                    {project.challenge || "Tidak ada detail tantangan spesifik."}
                                 </p>
                             </div>
                             <div className="p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/20">
                                 <h4 className="text-emerald-600 dark:text-emerald-400 font-bold mb-2 flex items-center gap-2">
-                                    <Box size={16} /> Solution
+                                    <Box size={16} /> Solusi
                                 </h4>
                                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                    {project.solution || "Solution details provided in documentation."}
+                                    {project.solution || "Detail solusi tersedia dalam dokumentasi."}
                                 </p>
                             </div>
                         </div>
@@ -221,7 +221,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                         {/* Tech Stack */}
                         <div>
                             <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">
-                                Technologies
+                                Teknologi
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {project.tech.map((t, i) => (
@@ -241,7 +241,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-6 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold hover:opacity-80 transition-all"
                                 >
-                                    <Github size={18} /> View Code
+                                    <Github size={18} /> Lihat Kode
                                 </a>
                             )}
                             {project.demo && (
@@ -251,7 +251,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all"
                                 >
-                                    <ExternalLink size={18} /> Live Demo
+                                    <ExternalLink size={18} /> Lihat Demo
                                 </a>
                             )}
                         </div>
@@ -270,10 +270,10 @@ export default function ProjectsBento() {
             {/* Header */}
             <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
                 <Badge variant="outline" shiny shinySpeed={3} className="mb-6 px-4 py-1.5 border-black/10 dark:border-white/10">
-                    Selected Works
+                    Karya Pilihan
                 </Badge>
                 <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
-                    Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Masterpieces</span>
+                    Koleksi <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Karya Terbaik</span>
                 </h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full" />
             </div>

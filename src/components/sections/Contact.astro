@@ -1,116 +1,226 @@
 ---
 import { text } from "../../data/i18n";
 import Button from "../common/Button.astro";
+import LustreText from "../ui/lustretext";
+import { Badge } from "../ui/badge";
+import { Mail, Send } from "lucide-react";
+import Globe from "../ui/globe";
 
 const t = text.contact;
 ---
 
-<section
-    id="contact"
-    class="py-20 bg-light-surface dark:bg-dark-surface transition-colors duration-300"
->
-    <div class="max-w-3xl mx-auto px-6">
-        <h2
-            class="text-3xl md:text-4xl font-serif font-bold text-center mb-12 text-light-textPrimary dark:text-dark-textPrimary"
+<section id="contact" class="relative py-24 bg-[#121212] overflow-hidden">
+  {/* Decorative Background Elements */}
+  <div
+    class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+  >
+    <div
+      class="absolute top-1/4 -right-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 -left-64 w-96 h-96 bg-[#E5E4E2]/5 rounded-full blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    {/* Header */}
+    <div class="text-center mb-16">
+      <div
+        class="flex items-center justify-center gap-3 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700"
+      >
+        <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+        <span
+          class="text-[#D4AF37] font-display tracking-[0.2em] text-sm uppercase"
+          >Mari Terhubung</span
         >
-            {t.title}
-        </h2>
+        <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+      </div>
+
+      <h2 class="mb-6">
+        <LustreText
+          client:visible
+          text={t.title}
+          className="text-4xl md:text-5xl font-display font-bold text-[#E5E4E2]"
+        />
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+      {/* Left Column - Globe */}
+      <div
+        class="relative w-full h-[400px] lg:h-[600px] flex items-center justify-center order-2 lg:order-1"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent z-10 pointer-events-none"
+        >
+        </div>
+        <Globe
+          client:only="react"
+          baseColor={[0.1, 0.1, 0.1]}
+          glowColor={[0.83, 0.69, 0.22]}
+          markerColor={[0.9, 0.9, 0.9]}
+          markers={[{ location: [-6.2088, 106.8456], size: 0.1 }]}
+          scale={1}
+          className="w-full h-full opacity-80"
+        />
+      </div>
+
+      {/* Right Column - Form */}
+      <div
+        class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)] order-1 lg:order-2"
+      >
+        <div class="mb-8">
+          <h3 class="text-2xl font-display font-bold text-[#E5E4E2] mb-2">
+            Mari Bekerja Sama
+          </h3>
+          <p class="text-neutral-400 font-light">
+            Punya ide proyek atau ingin diskusi teknologi terbaru? Saya selalu
+            terbuka untuk peluang baru.
+          </p>
+        </div>
 
         <form id="contact-form" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-2">
-                    <label
-                        for="name"
-                        class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
-                        >{t.name}</label
-                    >
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white"
-                    />
-                </div>
-                <div class="space-y-2">
-                    <label
-                        for="email"
-                        class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
-                        >{t.email}</label
-                    >
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white"
-                    />
-                </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="relative group">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder=" "
+                class="peer w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-[#E5E4E2] focus:border-[#D4AF37]/50 focus:ring-1 focus:ring-[#D4AF37]/50 outline-none transition-all duration-300"
+              />
+              <label
+                for="name"
+                class="absolute left-4 -top-2.5 px-1 rounded bg-[#121212] text-[10px] items-center uppercase tracking-widest text-[#D4AF37] font-display transition-all duration-300
+                               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-500 peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal
+                               peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:bg-[#121212] peer-focus:text-[10px] peer-focus:text-[#D4AF37] peer-focus:uppercase peer-focus:tracking-widest"
+              >
+                {t.name}
+              </label>
             </div>
+            <div class="relative group">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder=" "
+                class="peer w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-[#E5E4E2] focus:border-[#D4AF37]/50 focus:ring-1 focus:ring-[#D4AF37]/50 outline-none transition-all duration-300"
+              />
+              <label
+                for="email"
+                class="absolute left-4 -top-2.5 px-1 rounded bg-[#121212] text-[10px] items-center uppercase tracking-widest text-[#D4AF37] font-display transition-all duration-300
+                               peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-500 peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal
+                               peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:bg-[#121212] peer-focus:text-[10px] peer-focus:text-[#D4AF37] peer-focus:uppercase peer-focus:tracking-widest"
+              >
+                {t.email}
+              </label>
+            </div>
+          </div>
 
-            <div class="space-y-2">
-                <label
-                    for="subject"
-                    class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
-                    >{t.subject}</label
-                >
-                <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white"
-                />
-            </div>
+          <div class="relative group">
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              required
+              placeholder=" "
+              class="peer w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-[#E5E4E2] focus:border-[#D4AF37]/50 focus:ring-1 focus:ring-[#D4AF37]/50 outline-none transition-all duration-300"
+            />
+            <label
+              for="subject"
+              class="absolute left-4 -top-2.5 px-1 rounded bg-[#121212] text-[10px] items-center uppercase tracking-widest text-[#D4AF37] font-display transition-all duration-300
+                           peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-500 peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal
+                           peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:bg-[#121212] peer-focus:text-[10px] peer-focus:text-[#D4AF37] peer-focus:uppercase peer-focus:tracking-widest"
+            >
+              {t.subject}
+            </label>
+          </div>
 
-            <div class="space-y-2">
-                <label
-                    for="message"
-                    class="text-sm font-medium text-light-textPrimary dark:text-dark-textPrimary"
-                    >{t.message}</label
-                >
-                <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                    class="w-full px-4 py-3 rounded-lg bg-light-bg dark:bg-dark-bg border border-gray-200 dark:border-gray-700 focus:border-light-accent dark:focus:border-dark-accent focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none transition-all dark:text-white resize-none"
-                ></textarea>
-            </div>
+          <div class="relative group">
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              placeholder=" "
+              class="peer w-full px-5 py-4 rounded-xl bg-black/40 border border-white/10 text-[#E5E4E2] focus:border-[#D4AF37]/50 focus:ring-1 focus:ring-[#D4AF37]/50 outline-none transition-all duration-300 resize-none min-h-[150px]"
+            ></textarea>
+            <label
+              for="message"
+              class="absolute left-4 -top-2.5 px-1 rounded bg-[#121212] text-[10px] items-center uppercase tracking-widest text-[#D4AF37] font-display transition-all duration-300
+                           peer-placeholder-shown:top-6 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-500 peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal
+                           peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:bg-[#121212] peer-focus:text-[10px] peer-focus:text-[#D4AF37] peer-focus:uppercase peer-focus:tracking-widest"
+            >
+              {t.message}
+            </label>
+          </div>
 
-            <div class="pt-4">
-                <Button
-                    variant="primary"
-                    type="submit"
-                    class="w-full justify-center"
-                >
-                    {t.send}
-                </Button>
-            </div>
+          <div class="pt-2">
+            <Button
+              type="submit"
+              class="w-full justify-center group bg-gradient-to-r from-[#D4AF37] via-[#FDB931] to-[#D4AF37] !text-black font-display font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-all duration-500 hover:scale-100 active:scale-100 hover:!translate-y-0"
+            >
+              {t.send}
+              <Send
+                className="w-4 h-4 ml-2 group-hover:translate-x-10 group-hover:rotate-[360deg] transition-all duration-700 ease-in-out !text-black"
+              />
+            </Button>
+          </div>
         </form>
+      </div>
     </div>
-</section>
+  </div>
 
-<script>
+  <script>
     import emailjs from "@emailjs/browser";
+
+    const serviceID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+    const templateID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    // Initialize Global
+    emailjs.init({
+      publicKey: publicKey,
+    });
 
     const form = document.getElementById("contact-form") as HTMLFormElement;
 
     form?.addEventListener("submit", (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        // NOTE: Replace these with your actual EmailJS keys
-        // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form, 'YOUR_PUBLIC_KEY')
-        //   .then(() => {
-        //     alert('Message Sent!');
-        //     form.reset();
-        //   }, (error) => {
-        //     console.log('Failed...', error.text);
-        //     alert('Failed to send message.');
-        //   });
+      const btn = form.querySelector('button[type="submit"]');
+      const originalContent = btn ? btn.innerHTML : "";
 
-        // Simulasi Pengiriman
-        alert("Simulasi: Pesan terkirim! Konfigurasikan EmailJS ID asli Anda.");
-        form.reset();
+      if (btn) {
+        btn.innerHTML = "Mengirim...";
+        (btn as HTMLButtonElement).disabled = true;
+      }
+
+      emailjs.sendForm(serviceID, templateID, form).then(
+        () => {
+          alert("Pesan berhasil dikirim! Saya akan segera menghubungi Anda.");
+          form.reset();
+          if (btn) {
+            btn.innerHTML = originalContent;
+            (btn as HTMLButtonElement).disabled = false;
+          }
+        },
+        (error) => {
+          console.error("FAILED...", error);
+          alert(
+            "Gagal mengirim pesan. Kemungkinan masalah CORS atau setting EmailJS.\nCek Console untuk detail.",
+          );
+          if (btn) {
+            btn.innerHTML = originalContent;
+            (btn as HTMLButtonElement).disabled = false;
+            (btn as HTMLButtonElement).disabled = false;
+          }
+        },
+      );
     });
-</script>
+  </script>
+</section>
