@@ -174,134 +174,6 @@ const t = text.contact;
       </div>
     </div>
   </div>
-
-  <script>
-    import emailjs from "@emailjs/browser";
-
-    const serviceID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
-    const templateID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
-
-    // Initialize EmailJS
-    emailjs.init({
-      publicKey: publicKey,
-    });
-
-    // Toast Elements
-    const toast = document.getElementById("toast");
-    const toastContent = document.getElementById("toast-content");
-    const toastTitle = document.getElementById("toast-title");
-    const toastMessage = document.getElementById("toast-message");
-    const toastIconSuccess = document.getElementById("toast-icon-success");
-    const toastIconError = document.getElementById("toast-icon-error");
-    const toastIcon = document.getElementById("toast-icon");
-    const toastClose = document.getElementById("toast-close");
-
-    let toastTimeout: ReturnType<typeof setTimeout>;
-
-    function showToast(
-      type: "success" | "error",
-      title: string,
-      message: string,
-    ) {
-      if (
-        !toast ||
-        !toastContent ||
-        !toastTitle ||
-        !toastMessage ||
-        !toastIconSuccess ||
-        !toastIconError ||
-        !toastIcon
-      )
-        return;
-
-      // Reset
-      clearTimeout(toastTimeout);
-      toast.classList.remove("hidden");
-
-      // Set content
-      toastTitle.textContent = title;
-      toastMessage.textContent = message;
-
-      // Style based on type
-      if (type === "success") {
-        toastContent.className =
-          "relative flex items-start gap-4 p-5 rounded-2xl border backdrop-blur-xl shadow-2xl bg-[#121212]/90 border-[#D4AF37]/30 text-[#E5E4E2]";
-        toastIcon.className =
-          "shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[#D4AF37]/20 text-[#D4AF37]";
-        toastIconSuccess.classList.remove("hidden");
-        toastIconError.classList.add("hidden");
-      } else {
-        toastContent.className =
-          "relative flex items-start gap-4 p-5 rounded-2xl border backdrop-blur-xl shadow-2xl bg-[#121212]/90 border-red-500/30 text-[#E5E4E2]";
-        toastIcon.className =
-          "shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-red-500/20 text-red-400";
-        toastIconSuccess.classList.add("hidden");
-        toastIconError.classList.remove("hidden");
-      }
-
-      // Animate in
-      requestAnimationFrame(() => {
-        toast.classList.remove("translate-y-full", "opacity-0");
-        toast.classList.add("translate-y-0", "opacity-100");
-      });
-
-      // Auto dismiss after 5 seconds
-      toastTimeout = setTimeout(() => hideToast(), 5000);
-    }
-
-    function hideToast() {
-      if (!toast) return;
-      toast.classList.remove("translate-y-0", "opacity-100");
-      toast.classList.add("translate-y-full", "opacity-0");
-      setTimeout(() => toast.classList.add("hidden"), 500);
-    }
-
-    // Close button
-    toastClose?.addEventListener("click", hideToast);
-
-    // Form submission
-    const form = document.getElementById("contact-form") as HTMLFormElement;
-
-    form?.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const btn = form.querySelector('button[type="submit"]');
-      const originalContent = btn ? btn.innerHTML : "";
-
-      if (btn) {
-        btn.innerHTML = "Mengirim...";
-        (btn as HTMLButtonElement).disabled = true;
-      }
-
-      emailjs.sendForm(serviceID, templateID, form).then(
-        () => {
-          showToast(
-            "success",
-            "Pesan Terkirim!",
-            "Terima kasih telah menghubungi saya. Saya akan membalas secepatnya.",
-          );
-          form.reset();
-          if (btn) {
-            btn.innerHTML = originalContent;
-            (btn as HTMLButtonElement).disabled = false;
-          }
-        },
-        (error) => {
-          console.error("FAILED...", error);
-          showToast(
-            "error",
-            "Gagal Mengirim",
-            "Terjadi kesalahan. Silakan coba lagi atau hubungi langsung via WhatsApp.",
-          );
-          if (btn) {
-            btn.innerHTML = originalContent;
-            (btn as HTMLButtonElement).disabled = false;
-          }
-        },
-      );
-    });
-  </script>
 </section>
 
 {/* Toast Notification - OUTSIDE section to avoid overflow-hidden issues */}
@@ -376,3 +248,131 @@ const t = text.contact;
     </div>
   </div>
 </div>
+
+<script>
+  import emailjs from "@emailjs/browser";
+
+  const serviceID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+  const templateID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+
+  // Initialize EmailJS
+  emailjs.init({
+    publicKey: publicKey,
+  });
+
+  // Toast Elements
+  const toast = document.getElementById("toast");
+  const toastContent = document.getElementById("toast-content");
+  const toastTitle = document.getElementById("toast-title");
+  const toastMessage = document.getElementById("toast-message");
+  const toastIconSuccess = document.getElementById("toast-icon-success");
+  const toastIconError = document.getElementById("toast-icon-error");
+  const toastIcon = document.getElementById("toast-icon");
+  const toastClose = document.getElementById("toast-close");
+
+  let toastTimeout: ReturnType<typeof setTimeout>;
+
+  function showToast(
+    type: "success" | "error",
+    title: string,
+    message: string,
+  ) {
+    if (
+      !toast ||
+      !toastContent ||
+      !toastTitle ||
+      !toastMessage ||
+      !toastIconSuccess ||
+      !toastIconError ||
+      !toastIcon
+    )
+      return;
+
+    // Reset
+    clearTimeout(toastTimeout);
+    toast.classList.remove("hidden");
+
+    // Set content
+    toastTitle.textContent = title;
+    toastMessage.textContent = message;
+
+    // Style based on type
+    if (type === "success") {
+      toastContent.className =
+        "relative flex items-start gap-4 p-5 rounded-2xl border backdrop-blur-xl shadow-2xl bg-[#121212]/90 border-[#D4AF37]/30 text-[#E5E4E2]";
+      toastIcon.className =
+        "shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[#D4AF37]/20 text-[#D4AF37]";
+      toastIconSuccess.classList.remove("hidden");
+      toastIconError.classList.add("hidden");
+    } else {
+      toastContent.className =
+        "relative flex items-start gap-4 p-5 rounded-2xl border backdrop-blur-xl shadow-2xl bg-[#121212]/90 border-red-500/30 text-[#E5E4E2]";
+      toastIcon.className =
+        "shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-red-500/20 text-red-400";
+      toastIconSuccess.classList.add("hidden");
+      toastIconError.classList.remove("hidden");
+    }
+
+    // Animate in
+    requestAnimationFrame(() => {
+      toast.classList.remove("translate-y-full", "opacity-0");
+      toast.classList.add("translate-y-0", "opacity-100");
+    });
+
+    // Auto dismiss after 5 seconds
+    toastTimeout = setTimeout(() => hideToast(), 5000);
+  }
+
+  function hideToast() {
+    if (!toast) return;
+    toast.classList.remove("translate-y-0", "opacity-100");
+    toast.classList.add("translate-y-full", "opacity-0");
+    setTimeout(() => toast.classList.add("hidden"), 500);
+  }
+
+  // Close button
+  toastClose?.addEventListener("click", hideToast);
+
+  // Form submission
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalContent = btn ? btn.innerHTML : "";
+
+    if (btn) {
+      btn.innerHTML = "Mengirim...";
+      (btn as HTMLButtonElement).disabled = true;
+    }
+
+    emailjs.sendForm(serviceID, templateID, form).then(
+      () => {
+        showToast(
+          "success",
+          "Pesan Terkirim!",
+          "Terima kasih telah menghubungi saya. Saya akan membalas secepatnya.",
+        );
+        form.reset();
+        if (btn) {
+          btn.innerHTML = originalContent;
+          (btn as HTMLButtonElement).disabled = false;
+        }
+      },
+      (error) => {
+        console.error("FAILED...", error);
+        showToast(
+          "error",
+          "Gagal Mengirim",
+          "Terjadi kesalahan. Silakan coba lagi atau hubungi langsung via WhatsApp.",
+        );
+        if (btn) {
+          btn.innerHTML = originalContent;
+          (btn as HTMLButtonElement).disabled = false;
+        }
+      },
+    );
+  });
+</script>
