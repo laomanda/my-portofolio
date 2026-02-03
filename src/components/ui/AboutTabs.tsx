@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
 import { FolderGit2, CalendarDays, Activity, Briefcase, GraduationCap, Github, ExternalLink, Lock, ChevronDown } from 'lucide-react';
 
+import { TextAnimate } from './text-animate';
+
 interface AboutTabsProps {
   description: string;
   githubData: {
@@ -176,13 +178,32 @@ const AboutTabs: React.FC<AboutTabsProps> = ({ description, githubData: initialG
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <p className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light">
+              <TextAnimate 
+                as="p" 
+                animation="slideUp" 
+                by="word" 
+                className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light"
+                startOnView={false}
+                once={true}
+                delay={0.2}
+                duration={1.0}
+              >
                 {description}
-              </p>
+              </TextAnimate>
               
               <div className="pt-4">
                  <div className="italic text-[#E5E4E2]/60 border-l-2 border-[#D4AF37]/30 pl-4 py-2">
-                    "Menciptakan pengalaman digital yang menggabungkan presisi teknis dengan kemewahan estetika."
+                    <TextAnimate
+                      as="p"
+                      animation="slideUp"
+                      by="word"
+                      startOnView={false}
+                      once={true}
+                      delay={1.5}
+                      duration={1.0}
+                    >
+                      "Menciptakan pengalaman digital yang menggabungkan presisi teknis dengan kemewahan estetika."
+                    </TextAnimate>
                  </div>
               </div>
             </motion.div>

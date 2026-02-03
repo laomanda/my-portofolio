@@ -1,0 +1,50 @@
+---
+import MagicBento from "../MagicBento";
+import LustreText from "../ui/lustretext";
+---
+
+<section id="projects" class="relative py-24 bg-[#121212] overflow-hidden">
+  {/* Decorative Background Elements */}
+  <div
+    class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
+  >
+    <div
+      class="absolute top-1/4 -left-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 -right-64 w-96 h-96 bg-[#E5E4E2]/5 rounded-full blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div
+      class="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-700 mb-6 justify-center"
+    >
+      <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+      <span
+        class="text-[#D4AF37] font-display tracking-[0.2em] text-sm uppercase"
+        >Featured Work</span
+      >
+      <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+    </div>
+
+    <h2 class="text-center mb-16">
+      <LustreText
+        client:visible
+        text="Selected Projects"
+        className="text-4xl md:text-5xl font-display font-bold text-[#E5E4E2]"
+      />
+    </h2>
+
+    <p
+      class="hidden text-neutral-400 max-w-2xl mx-auto text-lg font-light leading-relaxed text-center mb-12"
+    >
+      Kumpulan proyek pilihan yang dikerjakan dengan presisi tinggi dan
+      teknologi modern.
+    </p>
+
+    <MagicBento client:visible />
+  </div>
+</section>
