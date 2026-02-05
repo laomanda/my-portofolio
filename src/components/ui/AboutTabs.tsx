@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
-import { FolderGit2, CalendarDays, Activity, Briefcase, GraduationCap, Github, ExternalLink, Lock, ChevronDown } from 'lucide-react';
+import { FolderGit2, CalendarDays, Activity, Briefcase, GraduationCap, Github, ExternalLink, Lock, ChevronDown, Award } from 'lucide-react';
 
 import { TextAnimate } from './text-animate';
+import { Badge } from './badge';
 
 interface AboutTabsProps {
   description: string;
@@ -338,30 +339,95 @@ const AboutTabs: React.FC<AboutTabsProps> = ({ description, githubData: initialG
           {activeTab === 'certificate' && (
             <motion.div
               key="certificate"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col items-center justify-center py-12 px-4 text-center space-y-6"
+              className="space-y-6"
             >
-               <div className="relative">
-                  <div className="absolute inset-0 bg-[#D4AF37] blur-[40px] opacity-10 rounded-full animate-pulse-slow"></div>
-                  <div className="relative p-6 rounded-full border border-[#D4AF37]/20 bg-[#1a1a1a] shadow-[0_0_30px_rgba(212,175,55,0.05)]">
-                     <Lock className="w-10 h-10 text-[#D4AF37]/80" />
-                  </div>
-               </div>
-               
-               <div className="space-y-2 max-w-md">
-                   <h3 className="text-xl font-bold text-[#E5E4E2] tracking-wide">Segera Hadir</h3>
-                   <p className="text-neutral-500 text-sm leading-relaxed">
-                       Sertifikat dan bukti kompetensi sedang dalam proses kurasi. Dokumen fisik saat ini masih tersimpan di arsip sekolah dan akan segera didigitalisasi.
-                   </p>
-               </div>
+               {/* Certificate Grid */}
+               <div className="grid grid-cols-1 gap-6">
+                  {/* LSP Digital Certificate */}
+                  <a 
+                     href="/assets/sertifikat/sertifikat.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="group relative p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-500 overflow-hidden flex flex-col sm:flex-row items-center sm:items-start gap-5 h-full hover:bg-white/[0.07]"
+                  >
+                     <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/5 to-[#D4AF37]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 z-0"></div>
+                     
+                     {/* Icon / Badge */}
+                     <div className="relative z-10 shrink-0 w-14 h-14 rounded-xl bg-[#121212] border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#121212] transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <Award className="w-7 h-7" />
+                     </div>
 
-               <div className="flex gap-2">
-                   {[0, 1, 2].map(i => (
-                       <div key={i} className="w-2 h-2 rounded-full bg-[#D4AF37]" style={{ opacity: 0.2 + (i * 0.3) }}></div>
-                   ))}
+                     {/* Text Content */}
+                     <div className="relative z-10 flex-1 text-center sm:text-left w-full">
+                        <div className="flex flex-col h-full justify-between">
+                            <div>
+                                <h4 className="text-lg font-display font-bold text-[#E5E4E2] group-hover:text-[#D4AF37] transition-colors leading-tight mb-1 tracking-wide">
+                                Sertifikasi Kompetensi
+                                </h4>
+                                <div className="text-sm text-neutral-400 mb-3 group-hover:text-neutral-300 transition-colors">LSP Teknologi Digital</div>
+                            </div>
+                            
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-2 mt-auto">
+                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300">
+                                    BNSP
+                                </Badge>
+                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300 delay-75">
+                                    Web Developer
+                                </Badge>
+                            </div>
+                        </div>
+                     </div>
+
+                     {/* Action Icon */}
+                     <div className="relative z-10 shrink-0 text-neutral-600 group-hover:text-[#D4AF37] transition-colors hidden sm:block">
+                        <ExternalLink className="w-5 h-5" />
+                     </div>
+                  </a>
+
+                  {/* DPF Certificate */}
+                  <a 
+                     href="/assets/sertifikat/dpf-1.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="group relative p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-500 overflow-hidden flex flex-col sm:flex-row items-center sm:items-start gap-5 h-full hover:bg-white/[0.07]"
+                  >
+                     <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/5 to-[#D4AF37]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 z-0"></div>
+                     
+                     {/* Icon / Badge */}
+                     <div className="relative z-10 shrink-0 w-14 h-14 rounded-xl bg-[#121212] border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#121212] transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <Award className="w-7 h-7" />
+                     </div>
+
+                     {/* Text Content */}
+                     <div className="relative z-10 flex-1 text-center sm:text-left w-full">
+                         <div className="flex flex-col h-full justify-between">
+                            <div>
+                                <h4 className="text-lg font-display font-bold text-[#E5E4E2] group-hover:text-[#D4AF37] transition-colors leading-tight mb-1 tracking-wide">
+                                Sertifikat Magang
+                                </h4>
+                                <div className="text-sm text-neutral-400 mb-3 group-hover:text-neutral-300 transition-colors">Djalaludin Pane Foundation</div>
+                            </div>
+
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-2 mt-auto">
+                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300">
+                                    Internship
+                                </Badge>
+                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300 delay-75">
+                                    Outstanding
+                                </Badge>
+                            </div>
+                        </div>
+                     </div>
+
+                     {/* Action Icon */}
+                     <div className="relative z-10 shrink-0 text-neutral-600 group-hover:text-[#D4AF37] transition-colors hidden sm:block">
+                        <ExternalLink className="w-5 h-5" />
+                     </div>
+                  </a>
                </div>
             </motion.div>
           )}
