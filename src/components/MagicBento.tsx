@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { gsap } from 'gsap';
 import { projects } from '../data/projects';
 import Stack from './Stack';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +7,7 @@ import { X, Github, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import LustreText from './ui/lustretext';
+// gsap import removed since it's unused
 
 interface BentoProps {
   enableSpotlight?: boolean;
@@ -40,68 +40,45 @@ const MagicBento: React.FC<BentoProps> = ({
   // Global Spotlight Effect - Updates all cards based on mouse position
   useEffect(() => {
     if (isMobile || !gridRef.current) return;
+    const grid = gridRef.current;
+    let rafId: number | null = null;
     
     const handleMouseMove = (e: MouseEvent) => {
-      const cards = gridRef.current?.getElementsByClassName('project-card');
-      if (!cards) return;
+      if (rafId) return; // Skip if a frame is already requested
 
-      for (const card of cards as any as HTMLElement[]) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isMobile]);
-
-  // Individual Tilt Effect
-  const useCardTilt = (ref: React.RefObject<HTMLDivElement>) => {
-    useEffect(() => {
-        if (isMobile || !ref.current) return;
-        const element = ref.current;
-        
-        const handleMouseMove = (e: MouseEvent) => {
-            const rect = element.getBoundingClientRect();
+      rafId = requestAnimationFrame(() => {
+        const cards = grid.getElementsByClassName('project-card');
+        for (const card of cards as any as HTMLElement[]) {
+            const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
             
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-            
-            gsap.to(element, {
-                rotateX,
-                rotateY,
-                duration: 0.1,
-                ease: 'power2.out',
-                transformPerspective: 1000
-            });
-        };
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        }
+        rafId = null;
+      });
+    };
 
-        const handleMouseLeave = () => {
-             gsap.to(element, {
-                rotateX: 0,
-                rotateY: 0,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        };
+    grid.addEventListener('mousemove', handleMouseMove);
+    grid.addEventListener('mouseleave', () => {
+         // Optional: Reset or fade out effect when leaving grid
+         const cards = grid.getElementsByClassName('project-card');
+         for (const card of cards as any as HTMLElement[]) {
+             card.style.removeProperty('--mouse-x');
+             card.style.removeProperty('--mouse-y');
+         }
+         if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+         }
+    });
 
-        element.addEventListener('mousemove', handleMouseMove);
-        element.addEventListener('mouseleave', handleMouseLeave);
-        
-        return () => {
-            element.removeEventListener('mousemove', handleMouseMove);
-            element.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, [isMobile]);
-  };
+    return () => {
+        grid.removeEventListener('mousemove', handleMouseMove);
+        if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [isMobile]);
 
     // Lock body scroll when modal is open
     useEffect(() => {
@@ -158,12 +135,8 @@ const MagicBento: React.FC<BentoProps> = ({
             const spanClass = isLarge ? "md:col-span-2" : "col-span-1";
 
             return (
-                <motion.div
+                <div
                     key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
                     onClick={() => setGalleryProject(project)}
                     className={cn(
                         "project-card relative group rounded-3xl overflow-hidden cursor-pointer border border-white/10 bg-[#121212] transition-all duration-300 hover:border-[#D4AF37]/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]",
@@ -201,7 +174,7 @@ const MagicBento: React.FC<BentoProps> = ({
                             See Details <ArrowUpRight size={16} />
                          </div>
                     </div>
-                </motion.div>
+                </div>
             )
         })}
       </div>

@@ -2,7 +2,7 @@
 import Aurora from "../Aurora.jsx";
 import TextType from "../TextType.jsx";
 import LustreText from "../ui/lustretext";
-import Lanyard from "../Lanyard";
+import Lanyard from "../Lanyard.tsx";
 import { Mail, LayoutGrid } from "@lucide/astro";
 import { Badge } from "../ui/badge";
 ---
@@ -72,6 +72,7 @@ import { Badge } from "../ui/badge";
         cursorClassName="text-[#D4AF37] ml-1"
         textClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F7E3A1] to-[#E5E4E2] drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]"
         className="text-xl md:text-2xl lg:text-3xl uppercase tracking-[0.2em] font-display font-bold"
+        variableSpeed={undefined}
       />
 
       <!-- Slogan -->

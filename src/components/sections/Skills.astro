@@ -33,9 +33,11 @@ const toolLogos = [
   { src: "/icons/tools/chatgpt.svg", alt: "ChatGPT" },
   { src: "/icons/tools/google.svg", alt: "Google" },
 ];
+
+const allLogos = [...languageLogos, ...frameworkLogos, ...toolLogos];
 ---
 
-<section id="skills" class="py-24 bg-[#121212] relative overflow-hidden">
+<section id="skills" class="py-24 relative overflow-hidden">
   <div
     class="absolute top-1/4 -right-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none"
   >
@@ -64,103 +66,21 @@ const toolLogos = [
         className="text-4xl md:text-5xl font-display font-bold text-[#E5E4E2]"
       />
     </h2>
+  </div>
 
-    <div class="space-y-16">
-      {/* Languages Row */}
-      <div class="space-y-6">
-        <h3
-          class="text-xs md:text-sm font-display text-neutral-500 border-l-2 border-[#D4AF37] pl-4 uppercase tracking-[0.2em] mb-4"
-        >
-          Logika & Bahasa Utama
-        </h3>
-        <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#121212] via-[#121212]/80 to-transparent z-10 pointer-events-none"
-          >
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#121212] via-[#121212]/80 to-transparent z-10 pointer-events-none"
-          >
-          </div>
-          <LogoLoop
-            client:visible
-            logos={languageLogos}
-            speed={45}
-            direction="left"
-            logoHeight={50}
-            gap={80}
-            pauseOnHover={true}
-            fadeOut={false}
-            scaleOnHover={false}
-            className="[&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-80 [&_li:hover_img]:opacity-100"
-            ariaLabel="Programming Languages"
-          />
-        </div>
-      </div>
-
-      {/* Frameworks Row */}
-      <div class="space-y-6">
-        <h3
-          class="text-xs md:text-sm font-display text-neutral-500 border-l-2 border-[#D4AF37] pl-4 uppercase tracking-[0.2em] mb-4"
-        >
-          Framework & Ekosistem
-        </h3>
-        <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none"
-          >
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none"
-          >
-          </div>
-          <LogoLoop
-            client:visible
-            logos={frameworkLogos}
-            speed={35}
-            direction="right"
-            logoHeight={55}
-            gap={80}
-            pauseOnHover={true}
-            fadeOut={false}
-            scaleOnHover={false}
-            className="[&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-80 [&_li:hover_img]:opacity-100"
-            ariaLabel="Frameworks and Libraries"
-          />
-        </div>
-      </div>
-
-      {/* Tools Row */}
-      <div class="space-y-6">
-        <h3
-          class="text-xs md:text-sm font-display text-neutral-500 border-l-2 border-[#D4AF37] pl-4 uppercase tracking-[0.2em] mb-4"
-        >
-          Alat & Infrastruktur
-        </h3>
-        <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none"
-          >
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none"
-          >
-          </div>
-          <LogoLoop
-            client:visible
-            logos={toolLogos}
-            speed={40}
-            direction="left"
-            logoHeight={45}
-            gap={80}
-            pauseOnHover={true}
-            fadeOut={false}
-            scaleOnHover={false}
-            className="[&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-80 [&_li:hover_img]:opacity-100"
-            ariaLabel="Development Tools"
-          />
-        </div>
-      </div>
-    </div>
+  <div class="relative w-full overflow-hidden">
+    <LogoLoop
+      client:visible
+      logos={allLogos}
+      speed={30}
+      direction="left"
+      logoHeight={60}
+      gap={80}
+      pauseOnHover={true}
+      fadeOut={false}
+      scaleOnHover={true}
+      className="py-10 [&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-60 [&_li:hover_img]:opacity-100"
+      ariaLabel="All Skills"
+    />
   </div>
 </section>
