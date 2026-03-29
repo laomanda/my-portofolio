@@ -1,6 +1,5 @@
 ---
 import { Github, Instagram, Phone } from "@lucide/astro";
-import StaggerChars from "../ui/stagger-chars";
 ---
 
 <footer
@@ -45,41 +44,25 @@ import StaggerChars from "../ui/stagger-chars";
     >
       {/* Menu */}
       <nav class="flex flex-col gap-6">
-        <a href="#home" class="w-fit">
-          <StaggerChars
-            client:only="react"
-            text="Beranda"
-            hoverText="Beranda"
-            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
-            hoverClassName="text-[#D4AF37]"
-          />
+        <a href="#home" class="w-fit group">
+          <span class="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500 group-hover:text-[#D4AF37]">
+            Beranda
+          </span>
         </a>
-        <a href="#about" class="w-fit">
-          <StaggerChars
-            client:only="react"
-            text="Tentang"
-            hoverText="Tentang"
-            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
-            hoverClassName="text-[#D4AF37]"
-          />
+        <a href="#about" class="w-fit group">
+          <span class="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500 group-hover:text-[#D4AF37]">
+            Tentang
+          </span>
         </a>
-        <a href="#projects" class="w-fit">
-          <StaggerChars
-            client:only="react"
-            text="Proyek"
-            hoverText="Proyek"
-            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
-            hoverClassName="text-[#D4AF37]"
-          />
+        <a href="#projects" class="w-fit group">
+          <span class="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500 group-hover:text-[#D4AF37]">
+            Proyek
+          </span>
         </a>
-        <a href="#contact" class="w-fit">
-          <StaggerChars
-            client:only="react"
-            text="Kontak"
-            hoverText="Kontak"
-            className="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500"
-            hoverClassName="text-[#D4AF37]"
-          />
+        <a href="#contact" class="w-fit group">
+          <span class="text-3xl md:text-5xl font-display font-bold text-white/30 transition-colors duration-500 group-hover:text-[#D4AF37]">
+            Kontak
+          </span>
         </a>
       </nav>
 

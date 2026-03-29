@@ -14,7 +14,6 @@ import {
   User,
   Mail,
 } from "@lucide/astro";
-import StaggerChars from "../ui/stagger-chars";
 import { DecoratedText } from "../ui/decorated-text";
 
 const t = text.nav;
@@ -110,12 +109,9 @@ const navLinks = [
               stroke-width="1.5"
             />
 
-            <StaggerChars
-              client:load
-              text={link.label}
-              className="text-xl md:text-3xl lg:text-5xl font-serif font-black text-light-textPrimary dark:text-dark-textPrimary"
-              hoverClassName="text-yellow-500"
-            />
+            <span class="text-xl md:text-3xl lg:text-5xl font-serif font-black text-light-textPrimary dark:text-dark-textPrimary group-hover:text-yellow-500 transition-colors duration-300">
+              {link.label}
+            </span>
           </a>
         ))
       }
