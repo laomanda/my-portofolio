@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import LustreText from './ui/lustretext';
 // gsap import removed since it's unused
 
 interface BentoProps {
@@ -159,7 +158,7 @@ const MagicBento: React.FC<BentoProps> = ({
                      <div className="relative z-20 p-6 md:p-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                           <div className="flex flex-wrap items-center gap-2 mb-3">
                               {project.tech.map((tech, i) => (
-                                <Badge key={i} variant="outline" shiny className="uppercase tracking-wider font-semibold text-xs px-3 py-1 bg-black/50 border-white/10 backdrop-blur-sm text-neutral-300">
+                                <Badge key={i} variant="outline" className="uppercase tracking-wider font-semibold text-xs px-3 py-1 bg-black/50 border-white/10 backdrop-blur-sm text-neutral-300">
                                     {tech}
                                 </Badge>
                               ))}
@@ -171,7 +170,7 @@ const MagicBento: React.FC<BentoProps> = ({
 
                          {/* Action Hint */}
                          <div className="flex items-center gap-2 text-sm font-display font-medium text-[#D4AF37]">
-                            See Details <ArrowUpRight size={16} />
+                            Lihat Detail <ArrowUpRight size={16} />
                          </div>
                     </div>
                 </div>
@@ -200,13 +199,13 @@ const MagicBento: React.FC<BentoProps> = ({
                     {/* Modal Header - Fixed at top */}
                     <div className="flex-none flex items-center justify-between p-6 border-b border-white/5 bg-[#121212] z-50">
                         <div>
-                            <h3 className="text-2xl font-display font-bold text-[#E5E4E2]">
-                                <LustreText text={galleryProject.title} />
+                            <h3 className="lustre-text dark:lustre-dark lustre-light text-2xl font-display font-bold">
+                                {galleryProject.title}
                             </h3>
                             <div className="flex items-center gap-3 mt-2">
                                 {galleryProject.github && (
                                     <a href={galleryProject.github} target="_blank" className="flex items-center gap-1 text-xs font-display text-[#D4AF37] hover:underline">
-                                        <Github size={14} /> Source Code
+                                        <Github size={14} /> Kode Sumber
                                     </a>
                                 )}
                             </div>

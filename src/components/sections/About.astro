@@ -4,8 +4,6 @@ import { text } from "../../data/i18n";
 import ProfileCard from "../ProfileCard";
 import AboutTabs from "../ui/AboutTabs";
 
-import LustreText from "../ui/lustretext";
-
 const t = text.about;
 const GITHUB_USERNAME = "laomanda";
 
@@ -113,13 +111,11 @@ const mutedText = "text-neutral-400";
             >Siapa Saya</span
           >
         </div>
-        {/* LustreText Title */}
+        {/* Title */}
         <div class="relative">
-          <LustreText
-            client:visible
-            text={t.title}
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#E5E4E2]"
-          />
+          <h2 class="lustre-text dark:lustre-dark lustre-light text-4xl md:text-5xl lg:text-6xl font-display font-bold">
+            {t.title}
+          </h2>
         </div>
       </div>
 

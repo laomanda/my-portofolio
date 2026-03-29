@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
 import { FolderGit2, CalendarDays, Activity, Briefcase, GraduationCap, Github, ExternalLink, Lock, ChevronDown, Award } from 'lucide-react';
 
-import { TextAnimate } from './text-animate';
 import { Badge } from './badge';
 
 interface AboutTabsProps {
@@ -179,32 +178,15 @@ const AboutTabs: React.FC<AboutTabsProps> = ({ description, githubData: initialG
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <TextAnimate 
-                as="p" 
-                animation="slideUp" 
-                by="word" 
-                className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light"
-                startOnView={false}
-                once={true}
-                delay={0.2}
-                duration={1.0}
-              >
+              <p className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light">
                 {description}
-              </TextAnimate>
+              </p>
               
               <div className="pt-4">
                  <div className="italic text-[#E5E4E2]/60 border-l-2 border-[#D4AF37]/30 pl-4 py-2">
-                    <TextAnimate
-                      as="p"
-                      animation="slideUp"
-                      by="word"
-                      startOnView={false}
-                      once={true}
-                      delay={1.5}
-                      duration={1.0}
-                    >
+                    <p>
                       "Menciptakan pengalaman digital yang menggabungkan presisi teknis dengan kemewahan estetika."
-                    </TextAnimate>
+                    </p>
                  </div>
               </div>
             </motion.div>
@@ -348,16 +330,11 @@ const AboutTabs: React.FC<AboutTabsProps> = ({ description, githubData: initialG
                {/* Certificate Grid */}
                <div className="grid grid-cols-1 gap-6">
                   {/* LSP Digital Certificate */}
-                  <a 
-                     href="/assets/sertifikat/sertifikat.pdf"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="group relative p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-500 overflow-hidden flex flex-col sm:flex-row items-center sm:items-start gap-5 h-full hover:bg-white/[0.07]"
+                  <div 
+                     className="relative p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-center sm:items-start gap-5 h-full"
                   >
-                     <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/5 to-[#D4AF37]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 z-0"></div>
-                     
                      {/* Icon / Badge */}
-                     <div className="relative z-10 shrink-0 w-14 h-14 rounded-xl bg-[#121212] border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#121212] transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                     <div className="relative z-10 shrink-0 w-14 h-14 rounded-xl bg-[#121212] border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.1)]">
                         <Award className="w-7 h-7" />
                      </div>
 
@@ -365,40 +342,31 @@ const AboutTabs: React.FC<AboutTabsProps> = ({ description, githubData: initialG
                      <div className="relative z-10 flex-1 text-center sm:text-left w-full">
                         <div className="flex flex-col h-full justify-between">
                             <div>
-                                <h4 className="text-lg font-display font-bold text-[#E5E4E2] group-hover:text-[#D4AF37] transition-colors leading-tight mb-1 tracking-wide">
+                                <h4 className="text-lg font-display font-bold text-[#E5E4E2] leading-tight mb-1 tracking-wide">
                                 Sertifikasi Kompetensi
                                 </h4>
-                                <div className="text-sm text-neutral-400 mb-3 group-hover:text-neutral-300 transition-colors">LSP Teknologi Digital</div>
+                                <div className="text-sm text-neutral-400 mb-3">LSP Teknologi Digital</div>
                             </div>
                             
                             <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-2 mt-auto">
-                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300">
+                                <Badge variant="outline" className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider">
                                     BNSP
                                 </Badge>
-                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300 delay-75">
+                                <Badge variant="outline" className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider">
                                     Web Developer
                                 </Badge>
                             </div>
                         </div>
                      </div>
 
-                     {/* Action Icon */}
-                     <div className="relative z-10 shrink-0 text-neutral-600 group-hover:text-[#D4AF37] transition-colors hidden sm:block">
-                        <ExternalLink className="w-5 h-5" />
-                     </div>
-                  </a>
+                  </div>
 
                   {/* DPF Certificate */}
-                  <a 
-                     href="/assets/sertifikat/dpf-1.pdf"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="group relative p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-500 overflow-hidden flex flex-col sm:flex-row items-center sm:items-start gap-5 h-full hover:bg-white/[0.07]"
+                  <div 
+                     className="relative p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-center sm:items-start gap-5 h-full"
                   >
-                     <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/5 to-[#D4AF37]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 z-0"></div>
-                     
                      {/* Icon / Badge */}
-                     <div className="relative z-10 shrink-0 w-14 h-14 rounded-xl bg-[#121212] border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-[#121212] transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                     <div className="relative z-10 shrink-0 w-14 h-14 rounded-xl bg-[#121212] border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.1)]">
                         <Award className="w-7 h-7" />
                      </div>
 
@@ -406,28 +374,24 @@ const AboutTabs: React.FC<AboutTabsProps> = ({ description, githubData: initialG
                      <div className="relative z-10 flex-1 text-center sm:text-left w-full">
                          <div className="flex flex-col h-full justify-between">
                             <div>
-                                <h4 className="text-lg font-display font-bold text-[#E5E4E2] group-hover:text-[#D4AF37] transition-colors leading-tight mb-1 tracking-wide">
+                                <h4 className="text-lg font-display font-bold text-[#E5E4E2] leading-tight mb-1 tracking-wide">
                                 Sertifikat Magang
                                 </h4>
-                                <div className="text-sm text-neutral-400 mb-3 group-hover:text-neutral-300 transition-colors">Djalaludin Pane Foundation</div>
+                                <div className="text-sm text-neutral-400 mb-3">Djalaludin Pane Foundation</div>
                             </div>
 
                             <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-2 mt-auto">
-                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300">
+                                <Badge variant="outline" className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider">
                                     Internship
                                 </Badge>
-                                <Badge variant="outline" shiny shinySpeed={4} className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300 delay-75">
+                                <Badge variant="outline" className="bg-[#D4AF37]/5 border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-semibold uppercase tracking-wider">
                                     Outstanding
                                 </Badge>
                             </div>
                         </div>
                      </div>
 
-                     {/* Action Icon */}
-                     <div className="relative z-10 shrink-0 text-neutral-600 group-hover:text-[#D4AF37] transition-colors hidden sm:block">
-                        <ExternalLink className="w-5 h-5" />
-                     </div>
-                  </a>
+                  </div>
                </div>
             </motion.div>
           )}

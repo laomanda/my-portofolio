@@ -1,86 +1,52 @@
 ---
 import { text } from "../../data/i18n";
-import { LogoLoop } from "../LogoLoop";
-import LustreText from "../ui/lustretext";
+import FallingSkills from "../FallingSkills";
 
 const t = text.skills;
 
-// Languages & Core
-const languageLogos = [
-  { src: "/icons/languange/Html.png", alt: "HTML5" },
-  { src: "/icons/languange/Css-Vanila.png", alt: "CSS3" },
-  { src: "/icons/languange/Js.png", alt: "JavaScript" },
-  { src: "/icons/languange/Php.png", alt: "PHP" },
-  { src: "/icons/languange/mysql.svg", alt: "MySQL" },
+const allSkills = [
+  { src: "/icons/languange/Html.png", name: "HTML5" },
+  { src: "/icons/languange/Css-Vanila.png", name: "CSS3" },
+  { src: "/icons/languange/Js.png", name: "JavaScript" },
+  { src: "/icons/languange/Php.png", name: "PHP" },
+  { src: "/icons/languange/mysql.svg", name: "MySQL" },
+  { src: "/icons/framework/React.svg", name: "React" },
+  { src: "/icons/framework/tailwindcss.svg", name: "Tailwind" },
+  { src: "/icons/framework/Node.js-Logo.png", name: "Node.js" },
+  { src: "/icons/framework/bootsrap.png", name: "Bootstrap" },
+  { src: "/icons/framework/laravel.png", name: "Laravel" },
+  { src: "/icons/framework/typescript-logo.png", name: "TypeScript" },
+  { src: "/icons/tools/git_bash.svg", name: "Git" },
+  { src: "/icons/tools/github.svg", name: "GitHub" },
+  { src: "/icons/tools/vscode.svg", name: "VS Code" },
+  { src: "/icons/tools/Vercel.svg", name: "Vercel" },
+  { src: "/icons/tools/chatgpt.svg", name: "ChatGPT" },
+  { src: "/icons/tools/google.svg", name: "Google" },
 ];
-
-// Frameworks & Libraries
-const frameworkLogos = [
-  { src: "/icons/framework/React.svg", alt: "React" },
-  { src: "/icons/framework/tailwindcss.svg", alt: "Tailwind CSS" },
-  { src: "/icons/framework/Node.js-Logo.png", alt: "Node.js" },
-  { src: "/icons/framework/bootsrap.png", alt: "Bootstrap" },
-  { src: "/icons/framework/laravel.png", alt: "Laravel" },
-  { src: "/icons/framework/typescript-logo.png", alt: "TypeScript" },
-];
-
-// Development Tools
-const toolLogos = [
-  { src: "/icons/tools/git_bash.svg", alt: "Git" },
-  { src: "/icons/tools/github.svg", alt: "GitHub" },
-  { src: "/icons/tools/vscode.svg", alt: "VS Code" },
-  { src: "/icons/tools/Vercel.svg", alt: "Vercel" },
-  { src: "/icons/tools/chatgpt.svg", alt: "ChatGPT" },
-  { src: "/icons/tools/google.svg", alt: "Google" },
-];
-
-const allLogos = [...languageLogos, ...frameworkLogos, ...toolLogos];
 ---
 
-<section id="skills" class="py-24 relative overflow-hidden">
-  <div
-    class="absolute top-1/4 -right-64 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none"
-  >
-  </div>
-  <div
-    class="absolute bottom-1/4 -left-64 w-96 h-96 bg-[#E5E4E2]/5 rounded-full blur-3xl pointer-events-none"
-  >
-  </div>
+<section id="skills" class="py-28 md:py-36 relative overflow-hidden bg-[#121212]">
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16 md:mb-20">
+      <div class="flex items-center gap-4 justify-center mb-8">
+        <span class="h-px w-16 bg-gradient-to-r from-transparent to-[#D4AF37]/40"></span>
+        <span class="text-[#D4AF37]/70 font-display tracking-[0.3em] text-[11px] uppercase font-semibold">
+          Arsitektur & Alat
+        </span>
+        <span class="h-px w-16 bg-gradient-to-l from-transparent to-[#D4AF37]/40"></span>
+      </div>
 
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div
-      class="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-700 mb-6 justify-center"
-    >
-      <span class="h-px w-12 bg-[#D4AF37]/60"></span>
-      <span
-        class="text-[#D4AF37] font-display tracking-[0.2em] text-sm uppercase"
-        >Arsitektur & Alat</span
-      >
-      <span class="h-px w-12 bg-[#D4AF37]/60"></span>
+      <h2 class="lustre-text dark:lustre-dark lustre-light text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-5">
+        {t.title}
+      </h2>
     </div>
 
-    <h2 class="text-center mb-16">
-      <LustreText
-        client:visible
-        text={t.title}
-        className="text-4xl md:text-5xl font-display font-bold text-[#E5E4E2]"
-      />
-    </h2>
-  </div>
-
-  <div class="relative w-full overflow-hidden">
-    <LogoLoop
-      client:visible
-      logos={allLogos}
-      speed={30}
-      direction="left"
-      logoHeight={60}
-      gap={80}
-      pauseOnHover={true}
-      fadeOut={false}
-      scaleOnHover={true}
-      className="py-10 [&_img]:grayscale [&_li:hover_img]:grayscale-0 [&_img]:transition-all [&_img]:duration-500 [&_img]:opacity-60 [&_li:hover_img]:opacity-100"
-      ariaLabel="All Skills"
+    <!-- Falling Skills -->
+    <FallingSkills
+      client:only="react"
+      items={allSkills}
     />
+
   </div>
 </section>

@@ -1,7 +1,6 @@
 ---
 import Aurora from "../Aurora.jsx";
 import TextType from "../TextType.jsx";
-import LustreText from "../ui/lustretext";
 import Lanyard from "../Lanyard.tsx";
 import { Mail, LayoutGrid } from "@lucide/astro";
 import { Badge } from "../ui/badge";
@@ -29,26 +28,10 @@ import { Badge } from "../ui/badge";
     <div
       class="flex flex-col items-center lg:items-start text-center lg:text-left gap-8 order-2 lg:order-1"
     >
-      <div
-        class="opacity-0 animate-fade-in-up animation-delay-100 flex justify-center lg:justify-start w-full"
-      >
-        <Badge
-          client:load
-          shiny={true}
-          variant="secondary"
-          className="mb-4 bg-gradient-to-r from-dark-accent/10 to-transparent backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 shadow-[0_0_15px_rgba(212,175,55,0.2)] tracking-[0.2em] font-display font-semibold px-6 py-2 rounded-full uppercase"
-        >
-          Tersedia Untuk Bekerja
-        </Badge>
-      </div>
-
       <div class="opacity-0 animate-fade-in-up animation-delay-200">
-        <LustreText
-          client:load
-          text="JAKKOB PANJAITAN"
-          className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-serif tracking-tighter leading-tight py-4"
-          speed={5}
-        />
+        <h1 class="lustre-text dark:lustre-dark lustre-light text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-serif tracking-tighter leading-tight py-4">
+          JAKKOB PANJAITAN
+        </h1>
       </div>
 
       <!-- Decorative Line -->
