@@ -1,30 +1,16 @@
 ---
-import Aurora from "../Aurora.jsx";
-import TextType from "../TextType.jsx";
-import Lanyard from "../Lanyard.tsx";
 import { Mail, LayoutGrid } from "@lucide/astro";
-import { Badge } from "../ui/badge";
 ---
 
 <section
   id="home"
   class="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-dark-bg"
 >
-  <!-- Background -->
-  <div class="absolute inset-0 z-0 pointer-events-none">
-    <Aurora
-      client:idle
-      colorStops={["#000000", "#d4af37", "#e5e4e2"]}
-      amplitude={1.2}
-      blend={0.4}
-    />
-  </div>
-
   <!-- Content Grid -->
   <div
     class="relative z-10 w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-8 h-full"
   >
-    <!-- Left Column: Typography (Order 2 on Mobile, 1 on Desktop) -->
+    <!-- Left Column: Typography -->
     <div
       class="flex flex-col items-center lg:items-start text-center lg:text-left gap-8 order-2 lg:order-1"
     >
@@ -40,23 +26,10 @@ import { Badge } from "../ui/badge";
       >
       </div>
 
-      <TextType
-        client:load
-        text={[
-          "Frontend Developer",
-          "Junior Web Developer",
-          "Full-Stack Developer",
-          "Crafting Modern & Clean UI",
-        ]}
-        typingSpeed={75}
-        deletingSpeed={50}
-        pauseDuration={1500}
-        cursorCharacter="_"
-        cursorClassName="text-[#D4AF37] ml-1"
-        textClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F7E3A1] to-[#E5E4E2] drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]"
-        className="text-xl md:text-2xl lg:text-3xl uppercase tracking-[0.2em] font-display font-bold"
-        variableSpeed={undefined}
-      />
+      <!-- Static Role Subtitle -->
+      <p class="text-xl md:text-2xl lg:text-3xl uppercase tracking-[0.2em] font-display font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F7E3A1] to-[#E5E4E2] drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+        Frontend Developer
+      </p>
 
       <!-- Slogan -->
       <p
@@ -66,7 +39,7 @@ import { Badge } from "../ui/badge";
         dan berkinerja tinggi."
       </p>
 
-      <!-- Premium CTA Buttons -->
+      <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
         <a
           href="#contact"
@@ -100,26 +73,7 @@ import { Badge } from "../ui/badge";
       </div>
     </div>
   </div>
-
-  <!-- Right Column: Replaced by Absolute Lanyard Overlay -->
 </section>
-
-<!-- Lanyard Overlay (Full Screen) - Closer camera, higher z-index -->
-<div
-  class="absolute inset-0 h-full z-50 pointer-events-none hidden lg:flex items-center justify-center"
->
-  <!-- Lanyard Container (Restricted to Right Half on Desktop to unblock Left Content) -->
-  <div class="w-full lg:w-1/2 ml-auto h-full pointer-events-auto">
-    <Lanyard
-      client:only="react"
-      fov={20}
-      position={[0, 0, 15]}
-      gravity={[0, -40, 0]}
-      groupPosition={[0, 4, 0]}
-      transparent
-    />
-  </div>
-</div>
 
 <style>
   @keyframes fadeInUp {
@@ -135,16 +89,7 @@ import { Badge } from "../ui/badge";
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
   }
-  .animation-delay-100 {
-    animation-delay: 0.1s;
-  }
   .animation-delay-200 {
     animation-delay: 0.3s;
-  }
-  .animation-delay-300 {
-    animation-delay: 0.5s;
-  }
-  .animation-delay-400 {
-    animation-delay: 0.7s;
   }
 </style>

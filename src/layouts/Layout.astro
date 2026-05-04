@@ -4,7 +4,6 @@ import "@fontsource/inter";
 import "@fontsource/cinzel";
 import "@fontsource/cormorant-garamond";
 import "../styles/global.css";
-import Preloader from "../components/common/Preloader.astro";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -34,9 +33,6 @@ const { title, lang = "id" } = Astro.props;
   <body
     class="bg-light-bg text-light-textPrimary dark:bg-dark-bg dark:text-dark-textPrimary transition-colors duration-300 font-sans"
   >
-    <Preloader />
-
-    <!-- ParticlesBackground removed for performance -->
     <slot />
 
     <script>

@@ -1,28 +1,7 @@
 ---
 import { text } from "../../data/i18n";
-import FallingSkills from "../FallingSkills";
 
 const t = text.skills;
-
-const allSkills = [
-  { src: "/icons/languange/Html.png", name: "HTML5" },
-  { src: "/icons/languange/Css-Vanila.png", name: "CSS3" },
-  { src: "/icons/languange/Js.png", name: "JavaScript" },
-  { src: "/icons/languange/Php.png", name: "PHP" },
-  { src: "/icons/languange/mysql.svg", name: "MySQL" },
-  { src: "/icons/framework/React.svg", name: "React" },
-  { src: "/icons/framework/tailwindcss.svg", name: "Tailwind" },
-  { src: "/icons/framework/Node.js-Logo.png", name: "Node.js" },
-  { src: "/icons/framework/bootsrap.png", name: "Bootstrap" },
-  { src: "/icons/framework/laravel.png", name: "Laravel" },
-  { src: "/icons/framework/typescript-logo.png", name: "TypeScript" },
-  { src: "/icons/tools/git_bash.svg", name: "Git" },
-  { src: "/icons/tools/github.svg", name: "GitHub" },
-  { src: "/icons/tools/vscode.svg", name: "VS Code" },
-  { src: "/icons/tools/Vercel.svg", name: "Vercel" },
-  { src: "/icons/tools/chatgpt.svg", name: "ChatGPT" },
-  { src: "/icons/tools/google.svg", name: "Google" },
-];
 ---
 
 <section id="skills" class="py-28 md:py-36 relative overflow-hidden bg-[#121212]">
@@ -32,7 +11,7 @@ const allSkills = [
       <div class="flex items-center gap-4 justify-center mb-8">
         <span class="h-px w-16 bg-gradient-to-r from-transparent to-[#D4AF37]/40"></span>
         <span class="text-[#D4AF37]/70 font-display tracking-[0.3em] text-[11px] uppercase font-semibold">
-          Arsitektur & Alat
+          Arsitektur &amp; Alat
         </span>
         <span class="h-px w-16 bg-gradient-to-l from-transparent to-[#D4AF37]/40"></span>
       </div>
@@ -42,11 +21,9 @@ const allSkills = [
       </h2>
     </div>
 
-    <!-- Falling Skills -->
-    <FallingSkills
-      client:only="react"
-      items={allSkills}
-    />
-
+    <!-- Technical Toolkit — akan diimplementasi di tahap redesign -->
+    <div class="text-center text-neutral-600 text-sm font-display tracking-[0.3em] uppercase py-12">
+      — Technical Toolkit —
+    </div>
   </div>
 </section>

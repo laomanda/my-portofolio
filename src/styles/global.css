@@ -1,20 +1,62 @@
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DIGITAL ATELIER - FINAL CSS VARIABLES
+   ============================================================ */
+:root {
+  --font-sans: "Inter Variable", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono Variable", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --color-obsidian: #070707;
+  --color-charcoal: #0E0E0C;
+  --color-surface: #151411;
+  --color-surface-elevated: #1B1915;
+
+  --color-ivory: #F7F0E6;
+  --color-bone: #D8CDBB;
+  --color-muted: #9C9384;
+
+  --color-gold: #C7A76C;
+  --color-gold-soft: #F0D49A;
+  --color-gold-deep: #8B6A35;
+
+  --color-teal-deep: #173B35;
+  --color-teal-mist: #8FD7C7;
+
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-gold: rgba(199, 167, 108, 0.34);
+
+  --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.32);
+  --shadow-gold: 0 24px 80px rgba(199, 167, 108, 0.12);
+
+  --gradient-hero:
+    radial-gradient(circle at 78% 18%, rgba(199, 167, 108, 0.18), transparent 32%),
+    radial-gradient(circle at 18% 22%, rgba(23, 59, 53, 0.42), transparent 34%),
+    linear-gradient(145deg, #070707 0%, #0E0E0C 48%, #151411 100%);
+
+  --gradient-card:
+    linear-gradient(145deg, rgba(247, 240, 230, 0.07), rgba(199, 167, 108, 0.025));
+
+  --gradient-border:
+    linear-gradient(135deg, rgba(199, 167, 108, 0.55), rgba(247, 240, 230, 0.10), rgba(143, 215, 199, 0.16));
+
+  --gradient-cta:
+    linear-gradient(135deg, #F0D49A 0%, #C7A76C 42%, #8B6A35 100%);
+}
+
+/* ============================================================
+   SHADCN / OLD UI TOKENS (Dipertahankan agar tidak rusak)
+   ============================================================ */
 @layer base {
-  html {
-    @apply scroll-smooth;
-  }
-
-  body {
-    @apply antialiased overflow-x-hidden;
-  }
-
-  ::selection {
-    @apply bg-light-accent/30 dark:bg-dark-accent/30 text-light-textPrimary dark:text-dark-textPrimary;
-  }
-
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -69,9 +111,185 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  * {
+    border-color: hsl(var(--border));
+  }
 }
 
-/* Lenis Recommended CSS */
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  background: var(--color-obsidian);
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(199, 167, 108, 0.08), transparent 34rem),
+    radial-gradient(circle at top left, rgba(23, 59, 53, 0.18), transparent 32rem),
+    var(--color-obsidian);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   SELECTION STYLE
+   ============================================================ */
+::selection {
+  background: rgba(199, 167, 108, 0.32);
+  color: var(--color-ivory);
+}
+
+/* ============================================================
+   FOCUS STYLE
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-gold-soft);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   SCROLLBAR STYLE
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(199, 167, 108, 0.28);
+  border: 2px solid var(--color-obsidian);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(199, 167, 108, 0.42);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 167, 108, 0.38) var(--color-obsidian);
+}
+
+/* ============================================================
+   TYPOGRAPHY HELPER FINAL
+   ============================================================ */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans-ui {
+  font-family: var(--font-sans);
+}
+
+.font-mono-ui {
+  font-family: var(--font-mono);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   BACKGROUND & SURFACE HELPER FINAL
+   ============================================================ */
+.bg-atelier {
+  background: var(--gradient-hero);
+}
+
+.bg-card-premium {
+  background:
+    var(--gradient-card),
+    var(--color-surface);
+}
+
+.border-premium {
+  border: 1px solid var(--border-soft);
+}
+
+.border-gold-subtle {
+  border: 1px solid var(--border-gold);
+}
+
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   LENIS CSS (Dipertahankan karena masih dipakai Layout.astro)
+   ============================================================ */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -93,33 +311,12 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Hide Scrollbar */
-::-webkit-scrollbar {
-  display: none;
-}
-
-html {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
+/* ============================================================
+   LUSTRE EFFECTS LAMA (Dipertahankan untuk komponen lama)
+   ============================================================ */
 @keyframes shine {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .animate-shine {
@@ -183,4 +380,3 @@ html {
     #e6e6e6 100%
   );
 }
-
