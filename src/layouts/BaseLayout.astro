@@ -1,0 +1,61 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/common/Navbar.astro";
+import Footer from "../components/common/Footer.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+};
+
+const {
+  title = "Jakkob Panjaitan — Frontend Developer",
+  description = "Frontend developer crafting elegant, fast, and business-ready web experiences with Astro, React, TypeScript, and TailwindCSS.",
+  image = "/og-image.jpg",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Jakkob Panjaitan" />
+    <meta name="theme-color" content="#070707" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body class="bg-obsidian text-ivory antialiased">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:rounded-full focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-obsidian"
+    >
+      Skip to content
+    </a>
+
+    <div class="relative min-h-screen overflow-x-hidden bg-obsidian">
+      <Navbar />
+
+      <main id="main-content" class="relative">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>
